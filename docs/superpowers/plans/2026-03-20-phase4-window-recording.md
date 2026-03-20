@@ -819,8 +819,7 @@ final class WindowRecorder: Recorder {
 
                 // Stop recording after 10 consecutive failures for any window
                 if consecutiveFailures[windowID] ?? 0 >= 10 {
-                    // In production, would trigger pause or stop
-                    print("⚠️ Too many failures for window \(windowID)")
+                    await stopRecordingForUnavailableWindow(windowID)
                 }
                 continue
             }
@@ -879,14 +878,9 @@ final class WindowRecorder: Recorder {
     }
 
     private func composeWindows(_ frames: [CGWindowID: CGImage], mode: PipMode, outputSize: CGSize) async -> CGImage {
-        // For now, simple composition - full implementation would use PipCompositor
-        // This is a placeholder that takes the first window's image
-        // In production: Use PipCompositor.composeWindowFrames()
-        if let firstImage = frames.values.first {
-            return firstImage
-        }
+        let compositor = PipCompositor()
+        let sortedWindowIDs = Array(frames.keys).sorted()
 
-        // Fallback: create blank image
         let context = CGContext(
             data: nil,
             width: Int(outputSize.width),
@@ -900,7 +894,26 @@ final class WindowRecorder: Recorder {
         context.setFillColor(CGColor.black)
         context.fill(CGRect(origin: .zero, size: outputSize))
 
+        for (index, windowID) in sortedWindowIDs.enumerated() {
+            guard let image = frames[windowID] else { continue }
+
+            let rect = compositor.calculateRect(for: index, mode: mode, in: outputSize)
+            context.draw(image, in: rect)
+        }
+
         return context.makeImage()!
+    }
+
+    private func stopRecordingForUnavailableWindow(_ windowID: CGWindowID) async {
+        // Pause recording when window unavailable
+        isPaused = true
+        captureTimer?.invalidate()
+
+        // In production, would trigger notification to UI
+        print("⚠️ Window \(windowID) unavailable, pausing recording")
+
+        // Note: Actual pause/resume with WindowTracker integration
+        // happens in Chunk 3 with UI implementation
     }
 
     private func encodeFrame(_ image: CGImage) async {
@@ -1039,7 +1052,10 @@ And update the Equatable conformance:
 
 ```swift
 case (.window(let wins1, let settings1), .window(let wins2, let settings2)):
-    return wins1.map(\.id) == wins2.map(\.id) && settings1.qualityPreset == settings2.qualityPreset
+    return wins1.map(\.id) == wins2.map(\.id) &&
+           settings1.qualityPreset == settings2.qualityPreset &&
+           settings1.compositingMode == settings2.compositingMode &&
+           settings1.codec == settings2.codec
 ```
 
 - [ ] **Step 3: Build to verify**
@@ -1161,6 +1177,7 @@ final class WindowSourceViewController: NSViewController {
         checkPermissions()
         loadWindows()
         startThumbnailUpdates()
+        setupWindowTracker()
     }
 
     override func viewWillDisappear() {
@@ -1330,6 +1347,13 @@ final class WindowSourceViewController: NSViewController {
         refreshWindowList()
     }
 
+    private func setupWindowTracker() {
+        windowTracker = WindowTracker()
+        windowTracker?.onWindowStateChanged = { [weak self] windowID, state in
+            self?.handleWindowStateChange(windowID, state)
+        }
+    }
+
     // MARK: - Actions
 
     @objc private func windowToggled(_ sender: NSButton) {
@@ -1392,6 +1416,34 @@ final class WindowSourceViewController: NSViewController {
             break
         }
     }
+
+    // MARK: - Window State Handling
+
+    private func handleWindowStateChange(_ windowID: CGWindowID, _ state: WindowTracker.WindowState) {
+        switch state {
+        case .visible:
+            hidePauseNotification()
+        case .hidden, .minimized, .onOtherSpace:
+            showPauseNotification()
+        case .closed:
+            // Remove from selection
+            selectedWindows.remove(windowID)
+            refreshWindowList()
+            updateCompositingMode()
+            startButton.isEnabled = !selectedWindows.isEmpty
+        }
+    }
+
+    private func showPauseNotification() {
+        // In production, would show overlay banner
+        // For now, just log
+        print("⏸️ Window unavailable - recording paused")
+    }
+
+    private func hidePauseNotification() {
+        // In production, would hide overlay banner
+        print("▶️ Window available - recording resumed")
+    }
 }
 ```
 
@@ -1400,7 +1452,16 @@ final class WindowSourceViewController: NSViewController {
 Run: `swift build`
 Expected: Build succeeds
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Manual UI verification**
+
+Run the app and verify:
+- WindowSourceViewController displays window list
+- Checkboxes allow selecting up to 4 windows
+- Quality and codec dropdowns work
+- Permission denied alert appears if needed
+Note: This is a quick smoke test before integration testing
+
+- [ ] **Step 4: Commit**
 
 ```bash
 git add Sources/native-macos/SourceSelector/WindowSourceViewController.swift
@@ -1509,6 +1570,69 @@ final class WindowRecorderIntegrationTests: XCTestCase {
         let url = try await recorder.stopRecording()
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
+
+        // Verify video dimensions match expected output
+        let asset = AVAsset(url: url)
+        let videoTrack = try await asset.loadTracks(withMediaType: .video).first
+        XCTAssertNotNil(videoTrack, "Should have video track")
+
+        if let track = videoTrack {
+            let size = try await track.load(.naturalSize)
+            XCTAssertEqual(size.width, settings.qualityPreset.resolution.width, "Video width should match quality preset")
+            XCTAssertEqual(size.height, settings.qualityPreset.resolution.height, "Video height should match quality preset")
+        }
+    }
+
+    func testAudioIntegration() async throws {
+        let windows = WindowDevice.enumerateWindows()
+        try XCTSkipIf(windows.isEmpty, "No windows available")
+
+        let window = windows.first!
+        var settings = WindowRecordingSettings()
+        settings.selectedWindows = [window]
+        settings.audioSettings = AudioSettings()
+        settings.audioSettings.systemAudioEnabled = true
+
+        let config = WindowRecorder.Config(
+            windowIDs: [window.id],
+            settings: settings
+        )
+
+        try await recorder.startRecording(to: outputURL, config: config)
+        try await Task.sleep(nanoseconds: 300_000_000)
+        _ = try await recorder.stopRecording()
+
+        // Verify output file has audio track
+        let asset = AVAsset(url: outputURL)
+        let audioTracks = try await asset.loadTracks(withMediaType: .audio)
+        XCTAssertFalse(audioTracks.isEmpty, "Should have audio track when system audio enabled")
+    }
+
+    func testWindowStateChangeHandling() async throws {
+        let windows = WindowDevice.enumerateWindows()
+        try XCTSkipIf(windows.isEmpty, "No windows available")
+
+        let window = windows.first!
+        var settings = WindowRecordingSettings()
+        settings.selectedWindows = [window]
+
+        let config = WindowRecorder.Config(
+            windowIDs: [window.id],
+            settings: settings
+        )
+
+        try await recorder.startRecording(to: outputURL, config: config)
+
+        // Simulate window becoming unavailable (minimize/close)
+        // In production: Would trigger WindowTracker callback
+        // For now: Verify recorder handles consecutive failures gracefully
+
+        try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+
+        let url = try await recorder.stopRecording()
+
+        // Verify recording completed despite potential state changes
+        XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
     }
 
     func testDifferentCodecs() async throws {
@@ -1575,13 +1699,42 @@ func startRecording<T: Recorder>(with recorder: T, config: T.Config) async throw
 
 WindowRecorder will work with this existing infrastructure.
 
-- [ ] **Step 1: Verify integration**
+- [ ] **Step 1: Verify build compatibility**
 
-No code changes needed. The existing RecordingController.startRecording(with:config:) method already accepts any Recorder protocol conformer.
+Run: `swift build`
+Expected: Build succeeds with no protocol conformance errors
+Verify: WindowRecorder compiles correctly with RecordingController
 
-- [ ] **Step 2: Mark as complete**
+- [ ] **Step 2: Verify type safety**
 
-This task is complete by design. WindowRecorder conforms to Recorder protocol, so it integrates automatically with RecordingController.
+Create a small test snippet to verify the generic integration works:
+
+```swift
+// Add this to WindowRecorderIntegrationTests temporarily to verify
+func testRecordingControllerIntegration() async throws {
+    let windows = WindowDevice.enumerateWindows()
+    try XCTSkipIf(windows.isEmpty, "No windows available")
+
+    let controller = RecordingController()
+    let recorder = WindowRecorder()
+    var settings = WindowRecordingSettings()
+    settings.selectedWindows = [windows.first!]
+
+    let config = WindowRecorder.Config(
+        windowIDs: [windows.first!.id],
+        settings: settings
+    )
+
+    // This should compile and work with the generic method
+    let url = try await controller.startRecording(with: recorder, config: config)
+    XCTAssertNotNil(url)
+}
+```
+
+Run: `swift test --filter testRecordingControllerIntegration`
+Expected: PASS (compiles successfully and runs)
+
+- [ ] **Step 3: Mark as complete**
 
 ### Task 9: Manual Testing Verification
 
@@ -1594,33 +1747,55 @@ Create `docs/superpowers/manual-testing/phase4-window-recording.md`:
 
 ## Window Selection
 - [ ] Window list displays all open applications
+  - **Expected:** See windows from Safari, Finder, Notes, etc. (not menu bar/dock)
 - [ ] Windows are filtered correctly (no menu bar, dock, or tiny windows)
+  - **Expected:** No windows smaller than 100x100, no system UI windows
 - [ ] Thumbnails appear after 2 seconds
+  - **Expected:** Each window shows 160x120 preview screenshot
 - [ ] Can select up to 4 windows with checkboxes
+  - **Expected:** Checkboxes enable selection, max 4 checked
 - [ ] 5th window selection is rejected
+  - **Expected:** 5th checkbox automatically unchecks
 - [ ] Window names and app names are displayed correctly
+  - **Expected:** Format: "Window Name (App Name)"
 
 ## Recording - Single Window
 - [ ] Start recording single window
+  - **Expected:** Recording starts, mini-view appears
 - [ ] Move window during recording (should track correctly)
+  - **Expected:** Video shows window at new positions
 - [ ] Resize window during recording (should track correctly)
+  - **Expected:** Video shows window at new sizes
 - [ ] Stop recording produces valid video file
+  - **Expected:** .mov file created in Recordings, plays in QuickTime
 - [ ] Video contains only the selected window content
+  - **Expected:** No other windows or desktop visible in output
 - [ ] Audio is captured if enabled
+  - **Expected:** System audio and/or mic audio in output
 
 ## Recording - Multiple Windows
 - [ ] Select and record 2 windows
+  - **Expected:** Output shows side-by-side layout (75%/25%)
 - [ ] Select and record 3 windows
+  - **Expected:** Output shows triple layout (main + 2 smaller)
 - [ ] Select and record 4 windows
+  - **Expected:** Output shows quad grid layout
 - [ ] Layout mode updates automatically (dual, triple, quad)
+  - **Expected:** Compositing mode matches window count
 - [ ] Output shows both windows in layout
+  - **Expected:** Both windows visible and correctly positioned
 
 ## State Changes
 - [ ] Minimize window during recording → Recording pauses
+  - **Expected:** Pause notification appears, capture freezes
 - [ ] Restore minimized window → Recording resumes
+  - **Expected:** Notification dismissed, capture continues
 - [ ] Close window during recording → Recording stops and saves
+  - **Expected:** Recording stops gracefully, file saved
 - [ ] Switch to different Space → Recording pauses
+  - **Expected:** "Window moved to another desktop" message
 - [ ] Switch back → Recording resumes
+  - **Expected:** Recording continues seamlessly
 
 ## Quality Settings
 - [ ] Low quality preset works
