@@ -12,11 +12,16 @@ struct WindowDevice: Identifiable, Sendable {
 
     /// Enumerates all available windows for recording
     static func enumerateWindows() -> [WindowDevice] {
-        guard let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] else {
+        // Include windows from all spaces, not just current space
+        guard let windowList = CGWindowListCopyWindowInfo(.optionOnScreenAboveWindow, kCGNullWindowID) as? [[String: Any]] else {
             return []
         }
 
         var devices: [WindowDevice] = []
+
+        // Get current app name to filter out OpenScreen's own windows
+        let currentAppName = Bundle.main.infoDictionary?["CFBundleName"] as? String
+            ?? ProcessInfo.processInfo.processName
 
         for windowInfo in windowList {
             guard let windowID = windowInfo[kCGWindowNumber as String] as? CGWindowID,
@@ -29,6 +34,11 @@ struct WindowDevice: Identifiable, Sendable {
 
             // Filter out menu bar, dock, and other system windows
             if layer == 0 {
+                continue
+            }
+
+            // Filter out windows owned by OpenScreen itself
+            if ownerName == currentAppName {
                 continue
             }
 
@@ -67,7 +77,7 @@ struct WindowDevice: Identifiable, Sendable {
 
     /// Updates bounds for all devices in place
     static func updateWindowBounds(_ devices: inout [WindowDevice]) {
-        guard let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] else {
+        guard let windowList = CGWindowListCopyWindowInfo(.optionOnScreenAboveWindow, kCGNullWindowID) as? [[String: Any]] else {
             return
         }
 
