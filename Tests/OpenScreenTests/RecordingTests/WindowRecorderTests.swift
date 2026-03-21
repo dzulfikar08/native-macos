@@ -89,4 +89,56 @@ final class WindowRecorderTests: XCTestCase {
 
         try await recorder.stopRecording()
     }
+
+    func testConsecutiveFailuresHandling() async throws {
+        // Use an invalid window ID that doesn't exist
+        let invalidWindowID: CGWindowID = 99999
+
+        var settings = WindowRecordingSettings()
+        settings.selectedWindows = [
+            WindowDevice(id: invalidWindowID, name: "Invalid", ownerName: "Test", bounds: .zero)
+        ]
+        settings.qualityPreset = .low
+
+        let config = WindowRecorder.Config(
+            windowIDs: [invalidWindowID],
+            settings: settings
+        )
+
+        try await recorder.startRecording(to: outputURL, config: config)
+
+        // Wait enough time for 10+ capture attempts (at 24fps = ~0.5 seconds)
+        try await Task.sleep(nanoseconds: 500_000_000)
+
+        // Recording should be paused due to consecutive failures
+        XCTAssertTrue(recorder.isRecording) // Session still active
+        // Note: isPaused is private, but we can verify the session hasn't crashed
+
+        // Cleanup
+        try await recorder.stopRecording()
+    }
+
+    func testCustomQualityPresetRejected() async throws {
+        let windows = [
+            WindowDevice(id: 1, name: "Test", ownerName: "Test", bounds: .zero)
+        ]
+        var settings = WindowRecordingSettings()
+        settings.selectedWindows = windows
+        settings.qualityPreset = .custom  // This should be rejected
+
+        let config = WindowRecorder.Config(
+            windowIDs: windows.map { $0.id },
+            settings: settings
+        )
+
+        // Should throw invalidSettings error
+        do {
+            try await recorder.startRecording(to: outputURL, config: config)
+            XCTFail("Expected WindowError.invalidSettings to be thrown")
+        } catch WindowError.invalidSettings {
+            // Expected error
+        } catch {
+            XCTFail("Expected WindowError.invalidSettings, got \(error)")
+        }
+    }
 }

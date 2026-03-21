@@ -25,6 +25,11 @@ struct WindowRecordingSettings: Sendable {
             return false
         }
 
+        // Quality preset must have a valid resolution (reject .custom preset)
+        guard qualityPreset.resolution != nil else {
+            return false
+        }
+
         return true
     }
 }

@@ -25,18 +25,20 @@ final class WindowRecorder: Recorder {
     private var _isRecording = false
     var isRecording: Bool { _isRecording }
 
-    private let ciContext = CIContext()
-
     func startRecording(to url: URL, config: Config) async throws {
         guard config.settings.isValid else {
+            throw WindowError.invalidSettings
+        }
+
+        guard let resolution = config.settings.qualityPreset.resolution else {
             throw WindowError.invalidSettings
         }
 
         // Setup AVAssetWriter
         let outputSettings: [String: Any] = [
             AVVideoCodecKey: config.settings.codec.avCodecKey,
-            AVVideoWidthKey: config.settings.qualityPreset.resolution!.width,
-            AVVideoHeightKey: config.settings.qualityPreset.resolution!.height,
+            AVVideoWidthKey: resolution.width,
+            AVVideoHeightKey: resolution.height,
             AVVideoCompressionPropertiesKey: [
                 AVVideoAverageBitRateKey: config.settings.qualityPreset.bitrate ?? 10_000_000
             ]
@@ -48,8 +50,8 @@ final class WindowRecorder: Recorder {
 
         let pixelBufferAttributes: [String: Any] = [
             kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32ARGB,
-            kCVPixelBufferWidthKey as String: config.settings.qualityPreset.resolution!.width,
-            kCVPixelBufferHeightKey as String: config.settings.qualityPreset.resolution!.height
+            kCVPixelBufferWidthKey as String: resolution.width,
+            kCVPixelBufferHeightKey as String: resolution.height
         ]
 
         pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(
@@ -68,6 +70,7 @@ final class WindowRecorder: Recorder {
         captureSession?.startSession(atSourceTime: .zero)
 
         _isRecording = true
+        frameCount = 0
         consecutiveFailures.removeAll()
 
         // Start capture loop
@@ -139,7 +142,10 @@ final class WindowRecorder: Recorder {
         // Composite if multiple windows
         let finalImage: CGImage
         if frames.count > 1 {
-            finalImage = await composeWindows(frames, mode: config.settings.compositingMode, outputSize: config.settings.qualityPreset.resolution!)
+            guard let resolution = config.settings.qualityPreset.resolution else {
+                return
+            }
+            finalImage = await composeWindows(frames, mode: config.settings.compositingMode, outputSize: resolution)
         } else if let singleFrame = frames.values.first {
             finalImage = singleFrame
         } else {
@@ -187,7 +193,7 @@ final class WindowRecorder: Recorder {
         let compositor = PipCompositor()
         let sortedWindowIDs = Array(frames.keys).sorted()
 
-        let context = CGContext(
+        guard let context = CGContext(
             data: nil,
             width: Int(outputSize.width),
             height: Int(outputSize.height),
@@ -195,7 +201,9 @@ final class WindowRecorder: Recorder {
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
             bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
-        )!
+        ) else {
+            fatalError("Failed to create CGContext for compositing")
+        }
 
         context.setFillColor(CGColor.black)
         context.fill(CGRect(origin: .zero, size: outputSize))
@@ -207,13 +215,21 @@ final class WindowRecorder: Recorder {
             context.draw(image, in: rect)
         }
 
-        return context.makeImage()!
+        guard let finalImage = context.makeImage() else {
+            fatalError("Failed to create CGImage from context")
+        }
+
+        return finalImage
     }
 
     private func stopRecordingForUnavailableWindow(_ windowID: CGWindowID) async {
         // Pause recording when window unavailable
         isPaused = true
         captureTimer?.invalidate()
+        captureTimer = nil
+
+        // Clean up resources
+        frameBuffer.removeAll()
 
         // In production, would trigger notification to UI
         print("⚠️ Window \(windowID) unavailable, pausing recording")
