@@ -50,11 +50,15 @@ final class TransitionPresetTests: XCTestCase {
             duration: CMTime(seconds: 1.5, preferredTimescale: 600)
         )
 
-        let encoded = try! JSONEncoder().encode(preset)
-        let decoded = try! JSONDecoder().decode(TransitionPreset.self, from: encoded)
+        do {
+            let encoded = try JSONEncoder().encode(preset)
+            let decoded = try JSONDecoder().decode(TransitionPreset.self, from: encoded)
 
-        XCTAssertEqual(preset.id, decoded.id)
-        XCTAssertEqual(preset.name, decoded.name)
-        XCTAssertEqual(preset.transitionType, decoded.transitionType)
+            XCTAssertEqual(preset.id, decoded.id)
+            XCTAssertEqual(preset.name, decoded.name)
+            XCTAssertEqual(preset.transitionType, decoded.transitionType)
+        } catch {
+            XCTFail("Encoding/decoding failed: \(error)")
+        }
     }
 }

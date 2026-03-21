@@ -4,7 +4,7 @@ import CoreMedia
 /// A preset transition configuration
 struct TransitionPreset: Identifiable, Equatable, Codable, Sendable {
     let id: UUID
-    var name: String
+    let name: String
     let isBuiltIn: Bool
     let transitionType: TransitionType
     let parameters: TransitionParameters
