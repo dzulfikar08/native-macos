@@ -92,6 +92,11 @@ enum TransitionType: Codable, Sendable, Equatable {
     static var allStandardTypes: [TransitionType] {
         [.crossfade, .fadeToColor, .wipe, .iris, .blinds]
     }
+
+    /// All standard transition types (alias for allStandardTypes)
+    static var allCases: [TransitionType] {
+        return allStandardTypes
+    }
 }
 
 // MARK: - Equatable

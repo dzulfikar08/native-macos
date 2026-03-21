@@ -364,7 +364,128 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
             return nil
         }
 
+        // Cmd+Opt+T: Show transition picker
+        if event.charactersIgnoringModifiers == "t" &&
+           modifiers.contains(.command) &&
+           modifiers.contains(.option) {
+            handleTransitionPickerShortcut()
+            return nil
+        }
+
         return event // Don't consume other key events
+    }
+
+    // MARK: - Transition Picker Shortcut
+
+    /// Handles Cmd+Opt+T shortcut to show transition picker
+    private func handleTransitionPickerShortcut() {
+        // Get selected clip IDs from timeline view
+        guard let selectedClipIDs = timelineView.viewModel?.selectedClipIDs,
+              selectedClipIDs.count == 2 else {
+            showTransitionShortcutError(message: "Please select exactly 2 clips to add a transition.")
+            return
+        }
+
+        // Get the two selected clips
+        let clipIDs = Array(selectedClipIDs)
+        guard let clip1 = editorState.clipTracks.first(where: { $0.clips.contains(where: { $0.id == clipIDs[0] }) })?.clips.first(where: { $0.id == clipIDs[0] }),
+              let clip2 = editorState.clipTracks.first(where: { $0.clips.contains(where: { $0.id == clipIDs[1] }) })?.clips.first(where: { $0.id == clipIDs[1] }) else {
+            showTransitionShortcutError(message: "Could not find the selected clips.")
+            return
+        }
+
+        // Check if clips overlap
+        let detector = ClipOverlapDetector()
+        guard let overlap = detector.findOverlap(between: clipIDs[0], and: clipIDs[1], in: editorState.clipTracks.flatMap { $0.clips }) else {
+            showTransitionShortcutError(message: "Selected clips must overlap to create a transition.")
+            return
+        }
+
+        // Check if transition already exists
+        if let existingTransition = editorState.transitions.first(where: { transition in
+            (transition.leadingClipID == clipIDs[0] && transition.trailingClipID == clipIDs[1]) ||
+            (transition.leadingClipID == clipIDs[1] && transition.trailingClipID == clipIDs[0])
+        }) {
+            // Select existing transition instead of creating new one
+            timelineView.viewModel?.selectTransition(existingTransition.id)
+            print("ℹ️ Selected existing transition: \(existingTransition.id)")
+            return
+        }
+
+        // Show transition picker at cursor location
+        showTransitionPicker(at: NSEvent.mouseLocation, leadingClip: clip1, trailingClip: clip2, overlap: overlap.overlapDuration)
+    }
+
+    /// Shows error alert for transition shortcut
+    private func showTransitionShortcutError(message: String) {
+        let alert = NSAlert()
+        alert.messageText = "Cannot Add Transition"
+        alert.informativeText = message
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+    }
+
+    /// Shows transition picker menu at cursor location
+    private func showTransitionPicker(at point: CGPoint, leadingClip: VideoClip, trailingClip: VideoClip, overlap: CMTime) {
+        let menu = NSMenu(title: "Add Transition")
+
+        // Add transition type options
+        for transitionType in TransitionType.allCases {
+            let item = NSMenuItem(title: transitionType.displayName, action: #selector(createTransitionFromMenu(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = TransitionPickerInfo(
+                leadingClipID: leadingClip.id,
+                trailingClipID: trailingClip.id,
+                type: transitionType,
+                overlap: overlap
+            )
+            menu.addItem(item)
+        }
+
+        // Add separator
+        menu.addItem(NSMenuItem.separator())
+
+        // Add cancel option
+        let cancelItem = NSMenuItem(title: "Cancel", action: nil, keyEquivalent: "")
+        menu.addItem(cancelItem)
+
+        // Show menu at cursor location
+        menu.popUp(positioning: nil, at: CGPoint(x: point.x, y: NSHeight((window?.screen?.frame ?? .zero) - point.y)), in: nil)
+    }
+
+    /// Creates transition from menu selection
+    @objc private func createTransitionFromMenu(_ sender: NSMenuItem) {
+        guard let info = sender.representedObject as? TransitionPickerInfo else {
+            return
+        }
+
+        // Create transition using factory
+        guard let transition = TransitionFactory.createTransition(
+            type: info.type,
+            between: info.leadingClipID,
+            and: info.trailingClipID,
+            in: editorState
+        ) else {
+            print("❌ Failed to create transition: insufficient overlap or invalid clips")
+            return
+        }
+
+        // Add transition to editor state
+        editorState.addTransition(transition)
+
+        // Select the newly created transition
+        timelineView.viewModel?.selectTransition(transition.id)
+
+        print("✅ Created transition: \(info.type.displayName) between clips")
+    }
+
+    /// Information needed to create transition from picker menu
+    private struct TransitionPickerInfo {
+        let leadingClipID: UUID
+        let trailingClipID: UUID
+        let type: TransitionType
+        let overlap: CMTime
     }
 
     // MARK: - Timeline Data Generation
