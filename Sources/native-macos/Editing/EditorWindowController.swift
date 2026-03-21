@@ -119,6 +119,14 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
             object: window
         )
 
+        // Observe transition selection changes to open inspector
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(transitionSelectionDidChange(_:)),
+            name: .transitionSelectionChanged,
+            object: nil
+        )
+
         // Setup video processor and start rendering
         let videoProcessor = VideoProcessor(assetURL: editorState.assetURL)
         self.videoProcessor = videoProcessor
@@ -511,6 +519,17 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
     }
 
     // MARK: - Inspector
+
+    /// Handles transition selection change notification
+    @objc private func transitionSelectionDidChange(_ notification: Notification) {
+        guard let transitionID = notification.userInfo?["transitionID"] as? UUID else {
+            // Transition was deselected, do nothing
+            return
+        }
+
+        // Open inspector for selected transition
+        showTransitionInspector(for: transitionID)
+    }
 
     /// Opens the transition inspector as a sheet
     /// - Parameter transitionID: ID of transition to inspect

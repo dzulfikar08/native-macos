@@ -28,7 +28,15 @@ final class TimelineViewModel: ObservableObject {
 
     /// Currently selected transition ID
     @Published private(set) var selectedTransitionID: UUID? {
-        didSet { objectWillChange.send() }
+        didSet {
+            objectWillChange.send()
+            // Post notification when selection changes
+            NotificationCenter.default.post(
+                name: .transitionSelectionChanged,
+                object: self,
+                userInfo: ["transitionID": selectedTransitionID as Any]
+            )
+        }
     }
 
     /// Currently dragging transition (for duration adjustment)

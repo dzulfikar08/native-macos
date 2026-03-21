@@ -345,4 +345,159 @@ final class EditorWindowIntegrationTests: XCTestCase {
         // Verify playback controls exist and are configured
         XCTAssertNotNil(controller?.playbackControls, "Playback controls should exist")
     }
+
+    // MARK: - Transition Selection Notification Tests
+
+    func testTransitionSelectionNotificationPosted() throws {
+        // Given
+        guard let url = testAssetURL else {
+            XCTFail("Test asset not available")
+            return
+        }
+
+        controller = EditorWindowController(recordingURL: url)
+        controller?.showWindow(nil)
+
+        let expectation = XCTestExpectation(description: "Transition selection notification posted")
+
+        // Setup notification observer
+        let observer = NotificationCenter.default.addObserver(
+            forName: .transitionSelectionChanged,
+            object: controller?.timelineView?.viewModel,
+            queue: .main
+        ) { notification in
+            // Then
+            XCTAssertNotNil(notification.userInfo?["transitionID"], "Notification should contain transitionID")
+            expectation.fulfill()
+        }
+
+        // When - select a transition
+        let testTransitionID = UUID()
+        controller?.timelineView?.viewModel?.selectTransition(testTransitionID)
+
+        // Wait for notification
+        wait(for: [expectation], timeout: 1.0)
+
+        NotificationCenter.default.removeObserver(observer)
+    }
+
+    func testTransitionSelectionNotificationContainsCorrectID() throws {
+        // Given
+        guard let url = testAssetURL else {
+            XCTFail("Test asset not available")
+            return
+        }
+
+        controller = EditorWindowController(recordingURL: url)
+        controller?.showWindow(nil)
+
+        let expectation = XCTestExpectation(description: "Transition selection notification contains correct ID")
+        let testTransitionID = UUID()
+
+        // Setup notification observer
+        let observer = NotificationCenter.default.addObserver(
+            forName: .transitionSelectionChanged,
+            object: controller?.timelineView?.viewModel,
+            queue: .main
+        ) { notification in
+            // Then
+            if let notifiedID = notification.userInfo?["transitionID"] as? UUID {
+                XCTAssertEqual(notifiedID, testTransitionID, "Notified ID should match selected ID")
+                expectation.fulfill()
+            }
+        }
+
+        // When - select the transition
+        controller?.timelineView?.viewModel?.selectTransition(testTransitionID)
+
+        // Wait for notification
+        wait(for: [expectation], timeout: 1.0)
+
+        NotificationCenter.default.removeObserver(observer)
+    }
+
+    func testTransitionDeselectionPostsNotification() throws {
+        // Given
+        guard let url = testAssetURL else {
+            XCTFail("Test asset not available")
+            return
+        }
+
+        controller = EditorWindowController(recordingURL: url)
+        controller?.showWindow(nil)
+
+        let testTransitionID = UUID()
+        controller?.timelineView?.viewModel?.selectTransition(testTransitionID)
+
+        let expectation = XCTestExpectation(description: "Transition deselection notification posted")
+
+        // Setup notification observer
+        let observer = NotificationCenter.default.addObserver(
+            forName: .transitionSelectionChanged,
+            object: controller?.timelineView?.viewModel,
+            queue: .main
+        ) { notification in
+            // Then - notification should have nil or missing transitionID
+            let notifiedID = notification.userInfo?["transitionID"] as? UUID
+            XCTAssertNil(notifiedID, "Notified ID should be nil when transition deselected")
+            expectation.fulfill()
+        }
+
+        // When - deselect transition
+        controller?.timelineView?.viewModel?.deselectTransition()
+
+        // Wait for notification
+        wait(for: [expectation], timeout: 1.0)
+
+        NotificationCenter.default.removeObserver(observer)
+    }
+
+    func testTransitionSelectionOpensInspector() throws {
+        // Given
+        guard let url = testAssetURL else {
+            XCTFail("Test asset not available")
+            return
+        }
+
+        controller = EditorWindowController(recordingURL: url)
+        controller?.showWindow(nil)
+
+        // Create a test transition in editor state
+        let editorState = controller?.editorState
+        let leadingClip = TestDataFactory.makeVideoClip(startTime: 0, duration: 5.0)
+        let trailingClip = TestDataFactory.makeVideoClip(startTime: 4.0, duration: 5.0)
+        let transition = TestDataFactory.makeTransition(
+            type: .crossfade,
+            leadingClipID: leadingClip.id,
+            trailingClipID: trailingClip.id,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600)
+        )
+
+        // Add clips and transition to editor state
+        try editorState?.addClip(leadingClip, toTrackAt: 0)
+        try editorState?.addClip(trailingClip, toTrackAt: 0)
+        editorState?.addTransition(transition)
+
+        let expectation = XCTestExpectation(description: "Inspector sheet presented")
+
+        // Observe sheet presentation
+        let sheetObserver = NotificationCenter.default.addObserver(
+            forName: NSWindow.willBeginSheetNotification,
+            object: controller?.window,
+            queue: .main
+        ) { _ in
+            expectation.fulfill()
+        }
+
+        // When - select the transition
+        controller?.timelineView?.viewModel?.selectTransition(transition.id)
+
+        // Wait for inspector to open
+        wait(for: [expectation], timeout: 1.0)
+
+        NotificationCenter.default.removeObserver(sheetObserver)
+
+        // Then - verify sheet is attached to window
+        XCTAssertNotNil(controller?.window?.sheet, "Sheet should be presented")
+    }
 }
