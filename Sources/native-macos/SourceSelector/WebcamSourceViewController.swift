@@ -130,12 +130,14 @@ final class WebcamSourceViewController: NSViewController {
 
         guard let window = view.window else { return }
 
-        let response = alert.runModal(for: window)
+        // Begin sheet for alert
+        alert.beginSheetModal(for: window) { response in
 
-        if response == .alertFirstButtonReturn {
-            // Open System Settings
-            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Camera") {
-                NSWorkspace.shared.open(url)
+            if response == .alertFirstButtonReturn {
+                // Open System Settings
+                if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Camera") {
+                    NSWorkspace.shared.open(url)
+                }
             }
         }
     }
