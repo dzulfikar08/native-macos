@@ -1,16 +1,16 @@
 import Foundation
 import CoreMedia
 
-/// Represents a transition between two video clips
-struct TransitionClip: Identifiable, Equatable, Codable, Sendable {
+/// A transition between two clips in the timeline
+struct TransitionClip: Codable, Sendable, Equatable {
     /// Unique identifier for this transition
     let id: UUID
 
     /// Type of transition effect
-    var type: TransitionType
+    let type: TransitionType
 
     /// Duration of the transition effect
-    var duration: CMTime
+    let duration: CMTime
 
     /// ID of the clip before the transition
     let leadingClipID: UUID
@@ -18,96 +18,145 @@ struct TransitionClip: Identifiable, Equatable, Codable, Sendable {
     /// ID of the clip after the transition
     let trailingClipID: UUID
 
-    /// Type-safe parameters for the transition
-    var parameters: TransitionParameters
+    /// Parameters specific to the transition type
+    let parameters: TransitionParameters
 
-    /// Whether the transition is currently enabled
-    var isEnabled: Bool
+    /// Whether the transition is currently active
+    let isEnabled: Bool
 
-    /// Creates a new transition
+    /// Initialize a new transition clip with all parameters
+    /// - Parameters:
+    ///   - id: Unique identifier (defaults to new UUID)
+    ///   - type: Type of transition
+    ///   - duration: Duration of the transition (must be positive)
+    ///   - leadingClipID: ID of the clip before the transition
+    ///   - trailingClipID: ID of the clip after the transition
+    ///   - parameters: Parameters for the transition (defaults to type's default)
+    ///   - isEnabled: Whether the transition is active (defaults to true)
     init(
         id: UUID = UUID(),
         type: TransitionType,
         duration: CMTime,
         leadingClipID: UUID,
         trailingClipID: UUID,
-        parameters: TransitionParameters,
+        parameters: TransitionParameters? = nil,
         isEnabled: Bool = true
     ) {
-        // Validate duration is positive
-        precondition(duration.isValid && duration > .zero, "Transition duration must be positive")
+        precondition(duration.seconds > 0, "Transition duration must be positive")
 
         self.id = id
         self.type = type
         self.duration = duration
         self.leadingClipID = leadingClipID
         self.trailingClipID = trailingClipID
-        self.parameters = parameters
+        self.parameters = parameters ?? TransitionParameters.default(for: type)
         self.isEnabled = isEnabled
     }
 
-    /// Creates a transition with default parameters for the given type
+    /// Initialize a new transition clip with default parameters for the type
+    /// - Parameters:
+    ///   - id: Unique identifier (defaults to new UUID)
+    ///   - type: Type of transition (duration defaults to type's default)
+    ///   - leadingClipID: ID of the clip before the transition
+    ///   - trailingClipID: ID of the clip after the transition
+    ///   - isEnabled: Whether the transition is active (defaults to true)
     init(
         id: UUID = UUID(),
         type: TransitionType,
-        duration: CMTime,
         leadingClipID: UUID,
         trailingClipID: UUID,
         isEnabled: Bool = true
     ) {
+        let defaultDuration = CMTime(seconds: type.defaultDuration, preferredTimescale: 600)
         self.init(
+            id: id,
+            type: type,
+            duration: defaultDuration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: nil,
+            isEnabled: isEnabled
+        )
+    }
+
+    /// Duration in seconds (convenience property)
+    var durationInSeconds: Double {
+        return duration.seconds
+    }
+
+    /// Validates that the transition is properly configured
+    var isValid: Bool {
+        return duration.seconds > 0 &&
+               parameters.isValid &&
+               leadingClipID != trailingClipID
+    }
+
+    /// Returns a new transition with the specified type
+    func withType(_ newType: TransitionType) -> TransitionClip {
+        TransitionClip(
+            id: id,
+            type: newType,
+            duration: duration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: TransitionParameters.default(for: newType),
+            isEnabled: isEnabled
+        )
+    }
+
+    /// Returns a new transition with the specified duration
+    func withDuration(_ newDuration: CMTime) -> TransitionClip {
+        TransitionClip(
+            id: id,
+            type: type,
+            duration: newDuration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: parameters,
+            isEnabled: isEnabled
+        )
+    }
+
+    /// Returns a new transition with the specified parameters
+    func withParameters(_ newParameters: TransitionParameters) -> TransitionClip {
+        TransitionClip(
             id: id,
             type: type,
             duration: duration,
             leadingClipID: leadingClipID,
             trailingClipID: trailingClipID,
-            parameters: .default(for: type),
+            parameters: newParameters,
             isEnabled: isEnabled
         )
     }
 
-    /// Duration in seconds (convenience accessor)
-    var durationInSeconds: Double {
-        return CMTimeGetSeconds(duration)
-    }
-
-    /// Validates this transition is internally consistent
-    var isValid: Bool {
-        return duration.isValid && duration > .zero && parameters.isValid
-    }
-
-    /// Returns a copy with updated type and default parameters
-    func withType(_ newType: TransitionType) -> TransitionClip {
-        var copy = self
-        copy.type = newType
-        copy.parameters = .default(for: newType)
-        return copy
-    }
-
-    /// Returns a copy with updated duration
-    func withDuration(_ newDuration: CMTime) -> TransitionClip {
-        var copy = self
-        copy.duration = newDuration
-        return copy
-    }
-
-    /// Returns a copy with updated parameters
-    func withParameters(_ newParameters: TransitionParameters) -> TransitionClip {
-        var copy = self
-        copy.parameters = newParameters
-        return copy
-    }
-
-    /// Returns a copy with enabled state toggled
+    /// Returns a new transition with the enabled state toggled
     func toggled() -> TransitionClip {
-        var copy = self
-        copy.isEnabled = !copy.isEnabled
-        return copy
+        TransitionClip(
+            id: id,
+            type: type,
+            duration: duration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: parameters,
+            isEnabled: !isEnabled
+        )
     }
-}
 
-/// Explicit Equatable conformance for CMTime comparison
-extension TransitionClip {
+    /// Returns a new transition with the specified enabled state
+    func withEnabled(_ enabled: Bool) -> TransitionClip {
+        TransitionClip(
+            id: id,
+            type: type,
+            duration: duration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: parameters,
+            isEnabled: enabled
+        )
+    }
+
+    /// Explicit Equatable conformance
     static func == (lhs: TransitionClip, rhs: TransitionClip) -> Bool {
         return lhs.id == rhs.id &&
                lhs.type == rhs.type &&

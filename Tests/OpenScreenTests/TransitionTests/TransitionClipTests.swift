@@ -57,6 +57,17 @@ final class TransitionClipTests: XCTestCase {
         XCTAssertFalse(transition.isEnabled)
     }
 
+    func testTransitionClipWithDefaultDuration() {
+        let transition = TransitionClip(
+            type: .fadeToColor,
+            leadingClipID: UUID(),
+            trailingClipID: UUID()
+        )
+
+        XCTAssertEqual(transition.type, .fadeToColor)
+        XCTAssertEqual(transition.durationInSeconds, 1.5, accuracy: 0.01)
+    }
+
     // MARK: - Validation Tests
 
     func testValidTransition() {
@@ -92,6 +103,18 @@ final class TransitionClipTests: XCTestCase {
 
         // Set invalid parameters
         transition.parameters = .wipe(direction: .left, softness: 2.0, borderWidth: 0)
+
+        XCTAssertFalse(transition.isValid)
+    }
+
+    func testInvalidTransitionWithSameClipIDs() {
+        let clipID = UUID()
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: clipID,
+            trailingClipID: clipID
+        )
 
         XCTAssertFalse(transition.isValid)
     }
@@ -165,11 +188,30 @@ final class TransitionClipTests: XCTestCase {
         let disabled = enabled.toggled()
 
         XCTAssertFalse(disabled.isEnabled)
+        XCTAssertEqual(enabled.id, disabled.id)
+        XCTAssertEqual(enabled.type, disabled.type)
+    }
+
+    func testWithEnabled() {
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: UUID(),
+            trailingClipID: UUID(),
+            isEnabled: true
+        )
+
+        let disabled = transition.withEnabled(false)
+        let reEnabled = disabled.withEnabled(true)
+
+        XCTAssertTrue(transition.isEnabled)
+        XCTAssertFalse(disabled.isEnabled)
+        XCTAssertTrue(reEnabled.isEnabled)
     }
 
     // MARK: - Codable Tests
 
-    func testEncodingDecoding() {
+    func testEncodingDecoding() throws {
         let original = TransitionClip(
             type: .iris,
             duration: CMTime(seconds: 1.5, preferredTimescale: 600),
@@ -177,10 +219,46 @@ final class TransitionClipTests: XCTestCase {
             trailingClipID: UUID()
         )
 
-        let encoded = try? JSONEncoder().encode(original)
-        let decoded = try? JSONDecoder().decode(TransitionClip.self, from: encoded!)
+        let encoded = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(TransitionClip.self, from: encoded)
 
         XCTAssertEqual(decoded, original)
+    }
+
+    func testEncodingDecodingWithCustomType() throws {
+        let original = TransitionClip(
+            type: .custom("MyTransition"),
+            duration: CMTime(seconds: 2.0, preferredTimescale: 600),
+            leadingClipID: UUID(),
+            trailingClipID: UUID()
+        )
+
+        let encoded = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(TransitionClip.self, from: encoded)
+
+        XCTAssertEqual(decoded, original)
+        if case .custom("MyTransition") = decoded.type {
+            // Success
+        } else {
+            XCTFail("Custom type not preserved")
+        }
+    }
+
+    func testEncodingDecodingWithComplexParameters() throws {
+        let params = TransitionParameters.wipe(direction: .diagonalLeft, softness: 0.5, borderWidth: 2.0)
+        let original = TransitionClip(
+            type: .wipe,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: UUID(),
+            trailingClipID: UUID(),
+            parameters: params
+        )
+
+        let encoded = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(TransitionClip.self, from: encoded)
+
+        XCTAssertEqual(decoded, original)
+        XCTAssertEqual(decoded.parameters, params)
     }
 
     // MARK: - Equatable Tests
