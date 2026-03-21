@@ -297,11 +297,6 @@ extension EditorState {
     /// Adds a transition to the timeline
     func addTransition(_ transition: TransitionClip) {
         transitions.append(transition)
-        NotificationCenter.default.post(
-            name: .transitionsChanged,
-            object: self,
-            userInfo: ["action": "add", "transitionID": transition.id]
-        )
     }
 
     /// Removes a transition from the timeline
@@ -310,22 +305,12 @@ extension EditorState {
         if selectedTransitionID == id {
             selectedTransitionID = nil
         }
-        NotificationCenter.default.post(
-            name: .transitionsChanged,
-            object: self,
-            userInfo: ["action": "remove", "transitionID": id]
-        )
     }
 
     /// Updates an existing transition
     func updateTransition(_ transition: TransitionClip) {
         if let index = transitions.firstIndex(where: { $0.id == transition.id }) {
             transitions[index] = transition
-            NotificationCenter.default.post(
-                name: .transitionsChanged,
-                object: self,
-                userInfo: ["action": "update", "transitionID": transition.id]
-            )
         }
     }
 
