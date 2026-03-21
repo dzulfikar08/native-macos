@@ -1,5 +1,5 @@
 import XCTest
-@testable import native_macos
+@testable import OpenScreen
 
 final class MiniRecordingViewTests: XCTestCase {
     func testMiniViewCanBeCreated() {

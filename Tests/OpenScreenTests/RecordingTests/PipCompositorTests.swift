@@ -1,6 +1,6 @@
 import XCTest
 import CoreVideo
-@testable import native_macos
+@testable import OpenScreen
 
 final class PipCompositorTests: XCTestCase {
     func testCalculateRectSingleMode() {

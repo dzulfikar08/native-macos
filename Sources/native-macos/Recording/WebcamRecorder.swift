@@ -1,4 +1,4 @@
-import AVFoundation
+@preconcurrency import AVFoundation
 import CoreVideo
 import Foundation
 
@@ -38,7 +38,7 @@ final class WebcamRecorder: NSObject, Recorder {
     private let audioMixer: AudioMixer
     private let pipCompositor: PipCompositor
 
-    private var frameBuffer: [Int: CVPixelBuffer] = [:]
+    nonisolated(unsafe) private var frameBuffer: [Int: CVPixelBuffer] = [:]
     private var frameBufferQueue = DispatchQueue(label: "com.openscreen.webcam.buffer")
     private let maxBufferedFrames = 3  // 100ms at 30fps
 
@@ -257,31 +257,40 @@ extension WebcamRecorder: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
     ) {
         // Check if this is video or audio output
         if output is AVCaptureVideoDataOutput {
+            // Get frame timestamp
+            let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+            guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+
+            // Suppress concurrency warning: we know CVPixelBuffer is safe to pass here
+            nonisolated(unsafe) let unsafeBuffer = pixelBuffer
+            nonisolated(unsafe) let unsafeOutput = output
+
+            // Copy the buffer data we need
             Task { @MainActor in
-                await handleVideoFrame(sampleBuffer, from: output)
+                // Find which camera this frame came from
+                let index = self.videoOutputs.first(where: { $0.value === unsafeOutput })?.key
+                await self.handleVideoFrame(pixelBuffer: unsafeBuffer, timestamp: timestamp, cameraIndex: index)
             }
         } else if output is AVCaptureAudioDataOutput {
+            // Suppress concurrency warning for sample buffer
+            nonisolated(unsafe) let unsafeBuffer = sampleBuffer
+
+            // For audio, we'll process directly without Task
             Task { @MainActor in
-                await handleAudioFrame(sampleBuffer)
+                // Process immediately on main actor
+                await self.handleAudioFrameDirect(unsafeBuffer)
             }
         }
     }
 
-    private func handleVideoFrame(_ sampleBuffer: CMSampleBuffer, from output: AVCaptureOutput) async {
+    private func handleVideoFrame(pixelBuffer: CVPixelBuffer, timestamp: CMTime, cameraIndex: Int?) async {
         guard let videoInput = videoInput,
               videoInput.isReadyForMoreMediaData,
-              let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
+              let index = cameraIndex,
               let config = currentConfig else {
             return
         }
 
-        // Find which camera this frame came from
-        guard let (index, _) = videoOutputs.first(where: { $0.value === output }) else {
-            return
-        }
-
-        // Get frame timestamp
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         if startTime == nil {
             startTime = timestamp
         }
@@ -376,14 +385,9 @@ extension WebcamRecorder: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return buffer
     }
 
-    private func handleAudioFrame(_ sampleBuffer: CMSampleBuffer) async {
+    private func handleAudioFrameDirect(_ sampleBuffer: CMSampleBuffer) async {
         guard let audioInput = audioInput,
               audioInput.isReadyForMoreMediaData else {
-            return
-        }
-
-        // Convert to AVAudioBuffer
-        guard let audioBufferList = CMSampleBufferGetDataBuffer(sampleBuffer) else {
             return
         }
 

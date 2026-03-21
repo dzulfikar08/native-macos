@@ -1,6 +1,6 @@
 import XCTest
 import AVFoundation
-@testable import native_macos
+@testable import OpenScreen
 
 final class WebcamRecordingIntegrationTests: XCTestCase {
     func testFullWebcamRecordingFlow() async throws {
