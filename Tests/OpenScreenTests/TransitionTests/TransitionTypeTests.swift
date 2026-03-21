@@ -13,30 +13,35 @@ final class TransitionTypeTests: XCTestCase {
 
     func testFadeToColorType() {
         let type = TransitionType.fadeToColor
+        XCTAssertEqual(type.rawValue, "fadeToColor")
         XCTAssertEqual(type.displayName, "Fade to Color")
         XCTAssertEqual(type.category, .basic)
     }
 
     func testWipeType() {
         let type = TransitionType.wipe
+        XCTAssertEqual(type.rawValue, "wipe")
         XCTAssertEqual(type.displayName, "Wipe")
         XCTAssertEqual(type.category, .directional)
     }
 
     func testIrisType() {
         let type = TransitionType.iris
+        XCTAssertEqual(type.rawValue, "iris")
         XCTAssertEqual(type.displayName, "Iris")
         XCTAssertEqual(type.category, .shape)
     }
 
     func testBlindsType() {
         let type = TransitionType.blinds
+        XCTAssertEqual(type.rawValue, "blinds")
         XCTAssertEqual(type.displayName, "Blinds")
         XCTAssertEqual(type.category, .directional)
     }
 
     func testCustomType() {
         let type = TransitionType.custom("My Transition")
+        XCTAssertEqual(type.rawValue, "custom:My Transition")
         XCTAssertEqual(type.displayName, "My Transition")
         XCTAssertEqual(type.category, .custom)
     }
