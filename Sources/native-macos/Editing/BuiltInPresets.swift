@@ -8,7 +8,10 @@ enum BuiltInPresets {
         let namespace = UUID(uuidString: "6ba7b810-9dad-11d1-80b4-00c04fd430c8")!
         let hash = name.djb2Hash
 
-        let uuidString = "\(namespace.uuidString.prefix(8))-\(hash % 10000:04x)-4000-8000-\(hash % 1000000000000:012x)"
+        let uuidString = String(format: "%@-%04x-4000-8000-%012x",
+                                String(namespace.uuidString.prefix(8)),
+                                hash % 10000,
+                                hash % 1000000000000)
         return UUID(uuidString: uuidString)!
     }
 
