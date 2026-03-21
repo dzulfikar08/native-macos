@@ -21,9 +21,6 @@ enum TransitionError: LocalizedError, Equatable {
     /// Transition would overlap with another transition
     case transitionOverlap(UUID)
 
-    /// Generic operation failure
-    case operationFailed(String)
-
     var errorDescription: String? {
         switch self {
         case .durationExceedsOverlap(let available, let requested):
@@ -50,9 +47,6 @@ enum TransitionError: LocalizedError, Equatable {
 
         case .transitionOverlap(let id):
             return "Transition would overlap with existing transition (ID: \(id))"
-
-        case .operationFailed(let message):
-            return "Operation failed: \(message)"
         }
     }
 
@@ -70,8 +64,6 @@ enum TransitionError: LocalizedError, Equatable {
             return "Adjust parameter to be between \(range.lowerBound) and \(range.upperBound)"
         case .transitionOverlap:
             return "Remove or adjust the overlapping transition"
-        case .operationFailed:
-            return "Try the operation again"
         }
     }
 
@@ -89,8 +81,6 @@ enum TransitionError: LocalizedError, Equatable {
         case (.parameterOutOfRange(let a1, let a2), .parameterOutOfRange(let b1, let b2)):
             return a1 == b1 && a2 == b2
         case (.transitionOverlap(let a), .transitionOverlap(let b)):
-            return a == b
-        case (.operationFailed(let a), .operationFailed(let b)):
             return a == b
         default:
             return false
