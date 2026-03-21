@@ -47,6 +47,9 @@ final class TimelineViewModel: ObservableObject {
     /// Layout cache for transition positioning
     private(set) var transitionLayoutCache: TransitionLayoutCache
 
+    /// Layout cache for clip positioning
+    private(set) var layoutCache: ClipLayoutCache
+
     /// Edges of a transition that can be dragged
     enum TransitionEdge {
         case leading  // Left edge (start time)
@@ -59,6 +62,7 @@ final class TimelineViewModel: ObservableObject {
         self.editorState = editorState
         self.playheadPosition = .zero
         self.transitionLayoutCache = TransitionLayoutCache()
+        self.layoutCache = ClipLayoutCache()
 
         // Sync transitions from editor state
         syncTransitions()
@@ -334,6 +338,22 @@ extension TimelineViewModel {
         if let index = transitions.firstIndex(where: { $0.id == transition.id }) {
             transitions[index] = transition
             editorState.updateTransition(transition)
+        }
+    }
+
+    /// Handles transition drag gesture
+    func handleTransitionDrag(transitionID: UUID, edge: TransitionEdge, offset: CGFloat) {
+        guard draggingTransitionID == nil || draggingTransitionID == transitionID else {
+            return
+        }
+
+        if draggingTransitionID == nil {
+            // Starting new drag
+            let position = CGPoint(x: offset, y: 0)
+            startTransitionDrag(transitionID: transitionID, edge: edge, at: position)
+        } else {
+            // Continuing drag
+            updateTransitionDrag(at: CGPoint(x: offset, y: 0))
         }
     }
 }

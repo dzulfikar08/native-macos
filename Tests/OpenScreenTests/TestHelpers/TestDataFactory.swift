@@ -151,11 +151,8 @@ enum TestDataFactory {
     // MARK: - Timeline Coordinators
 
     /// Creates a test ClipLayoutCache with default settings
-    static func makeClipLayoutCache(
-        viewportWidth: CGFloat = 1920,
-        timeScale: CGFloat = 20.0
-    ) -> ClipLayoutCache {
-        return ClipLayoutCache(viewportWidth: viewportWidth, timeScale: timeScale)
+    static func makeClipLayoutCache() -> ClipLayoutCache {
+        return ClipLayoutCache()
     }
 
     /// Creates a test SnappingCoordinator with default settings
