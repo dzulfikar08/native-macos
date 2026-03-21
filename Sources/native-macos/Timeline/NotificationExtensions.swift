@@ -121,10 +121,6 @@ extension Notification.Name {
     /// userInfo contains: "transitionID" (UUID)
     static let transitionDeleted = Notification.Name("transitionDeleted")
 
-    /// Notification posted when transition selection changes
-    /// userInfo contains: "transitionID" (UUID?)
-    static let transitionSelectionChanged = Notification.Name("transitionSelectionChanged")
-
     // MARK: - Transition userInfo Keys
 
     /// userInfo key for transition ID
