@@ -58,19 +58,17 @@ final class TransitionTypeTests: XCTestCase {
 
     // MARK: - Codable Tests
 
-    func testEncodingDecoding() {
+    func testEncodingDecoding() throws {
         let original = TransitionType.crossfade
-        let encoded = try? JSONEncoder().encode(original)
-        let decoded = try? JSONDecoder().decode(TransitionType.self, from: encoded!)
-
+        let encoded = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(TransitionType.self, from: encoded)
         XCTAssertEqual(decoded, original)
     }
 
-    func testCustomTypeEncodingDecoding() {
+    func testCustomTypeEncodingDecoding() throws {
         let original = TransitionType.custom("Custom Transition")
-        let encoded = try? JSONEncoder().encode(original)
-        let decoded = try? JSONDecoder().decode(TransitionType.self, from: encoded!)
-
+        let encoded = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(TransitionType.self, from: encoded)
         XCTAssertEqual(decoded, original)
     }
 }
