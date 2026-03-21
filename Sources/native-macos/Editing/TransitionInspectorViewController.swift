@@ -11,6 +11,11 @@ final class TransitionInspectorViewController: NSViewController {
     /// The transition being edited
     private var transition: TransitionClip
 
+    /// Exposes the current transition state for testing
+    var currentTransition: TransitionClip {
+        return transition
+    }
+
     /// Original transition for reset functionality
     private var originalTransition: TransitionClip
 
@@ -46,6 +51,30 @@ final class TransitionInspectorViewController: NSViewController {
         let tabItem = NSTabViewItem(viewController: NSViewController())
         tabItem.label = "Preview"
         return tabItem
+    }()
+
+    /// Presets table view
+    private lazy var presetsTableView: NSTableView = {
+        let tableView = NSTableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.headerView = nil
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("PresetColumn"))
+        column.width = 300
+        tableView.addTableColumn(column)
+
+        return tableView
+    }()
+
+    /// Presets scroll view
+    private lazy var presetsScrollView: NSScrollView = {
+        let scrollView = NSScrollView()
+        scrollView.hasVerticalScroller = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = presetsTableView
+        return scrollView
     }()
 
     /// Properties view controller containing all parameter controls
@@ -296,6 +325,8 @@ final class TransitionInspectorViewController: NSViewController {
 
         setupTabView()
         setupPropertiesTab()
+        setupPresetsTab()
+        setupPreviewTab()
         setupActionButtons()
         loadTransitionValues()
     }
@@ -341,6 +372,32 @@ final class TransitionInspectorViewController: NSViewController {
 
         // Set content size
         contentView.widthAnchor.constraint(equalToConstant: 360).isActive = true
+    }
+
+    private func setupPresetsTab() {
+        let viewController = NSViewController()
+        viewController.view = presetsScrollView
+        presetsTabView.viewController = viewController
+    }
+
+    private func setupPreviewTab() {
+        let viewController = NSViewController()
+        let previewView = TransitionPreviewView(
+            transition: transition,
+            renderer: TransitionPreviewRenderer()
+        )
+        previewView.translatesAutoresizingMaskIntoConstraints = false
+
+        viewController.view = previewView
+
+        NSLayoutConstraint.activate([
+            previewView.topAnchor.constraint(equalTo: viewController.view.topAnchor, constant: 20),
+            previewView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor, constant: 20),
+            previewView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor, constant: -20),
+            previewView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor, constant: -20)
+        ])
+
+        previewTabView.viewController = viewController
     }
 
     private func createBasicPropertiesStack() -> NSStackView {
@@ -770,5 +827,73 @@ final class TransitionInspectorViewController: NSViewController {
         // Recreate properties tab with new controls
         setupPropertiesTab()
         loadTransitionValues()
+    }
+
+    // MARK: - Preset Application
+
+    /// Applies preset values to transition
+    func applyPreset(_ preset: TransitionPreset) {
+        // Update transition with preset values
+        transition = TransitionClip(
+            type: preset.transitionType,
+            duration: preset.duration,
+            leadingClipID: transition.leadingClipID,
+            trailingClipID: transition.trailingClipID,
+            parameters: preset.parameters,
+            isEnabled: transition.isEnabled
+        )
+
+        // Refresh properties view
+        reloadParameterControls()
+
+        // Update preview if available
+        if let previewViewController = previewTabView.viewController,
+           let previewView = previewViewController.view as? TransitionPreviewView {
+            previewView.updateTransition(transition)
+        }
+    }
+
+    /// Helper to format duration for display
+    private func formatDuration(_ duration: CMTime) -> String {
+        return String(format: "%.1fs", duration.seconds)
+    }
+}
+
+// MARK: - NSTableViewDataSource & Delegate
+
+extension TransitionInspectorViewController: NSTableViewDataSource, NSTableViewDelegate {
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return BuiltInPresets.presets.count
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let preset = BuiltInPresets.presets[row]
+
+        let cellView = tableView.makeView(
+            withIdentifier: NSUserInterfaceItemIdentifier("PresetCell"),
+            owner: nil
+        ) as? NSTableCellView ?? NSTableCellView()
+
+        cellView.textField?.stringValue = "\(preset.name) (\(formatDuration(preset.duration)))"
+
+        return cellView
+    }
+
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 32
+    }
+
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return true
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        guard let tableView = notification.object as? NSTableView,
+              tableView.selectedRow >= 0 else {
+            return
+        }
+
+        let preset = BuiltInPresets.presets[tableView.selectedRow]
+        applyPreset(preset)
     }
 }

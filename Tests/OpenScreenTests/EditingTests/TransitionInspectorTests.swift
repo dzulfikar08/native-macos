@@ -344,4 +344,74 @@ final class TransitionInspectorTests: XCTestCase {
         // Inspector should be deallocated
         XCTAssertNil(weakInspector, "TransitionInspectorViewController leaked memory")
     }
+
+    // MARK: - Presets Tab Tests
+
+    func testPresetsTabShowsAllBuiltInPresets() {
+        let tabView = sut.value(forKey: "tabView") as? NSTabView
+
+        // Switch to Presets tab (index 1)
+        tabView?.selectTabViewItem(at: 1)
+
+        let selectedTab = tabView?.selectedTabViewItem
+        XCTAssertEqual(selectedTab?.label, "Presets")
+
+        // Verify all presets are available
+        XCTAssertEqual(BuiltInPresets.presets.count, 5)
+    }
+
+    func testApplyPresetUpdatesTransition() {
+        guard let preset = BuiltInPresets.presets.first else {
+            XCTFail("No presets available")
+            return
+        }
+
+        // Apply the preset
+        sut.applyPreset(preset)
+
+        // Verify transition was updated
+        let transition = sut.currentTransition
+        XCTAssertEqual(transition.type, preset.transitionType)
+        XCTAssertEqual(transition.parameters, preset.parameters)
+        XCTAssertEqual(transition.duration.seconds, preset.duration.seconds, accuracy: 0.01)
+    }
+
+    func testApplyPresetUpdatesControls() {
+        guard let preset = BuiltInPresets.presets.first(where: { $0.transitionType == .fadeToColor }) else {
+            XCTFail("Fade to color preset not found")
+            return
+        }
+
+        // Apply fade to color preset
+        sut.applyPreset(preset)
+
+        // Verify controls were updated
+        let typeDropdown = sut.value(forKey: "typeDropdown") as? NSPopUpButton
+        let durationSlider = sut.value(forKey: "durationSlider") as? NSSlider
+        let durationLabel = sut.value(forKey: "durationLabel") as? NSTextField
+
+        XCTAssertEqual(typeDropdown?.selectedItem?.representedObject as? TransitionType, .fadeToColor)
+        XCTAssertEqual(durationSlider?.doubleValue, preset.duration.seconds, accuracy: 0.01)
+        XCTAssertEqual(durationLabel?.stringValue, "2.0s")
+    }
+
+    func testApplyDifferentPresets() {
+        // Test applying multiple presets in sequence
+        for preset in BuiltInPresets.presets {
+            let inspector = TransitionInspectorViewController(
+                transition: testTransition,
+                onApply: { _ in },
+                onDelete: { }
+            )
+            _ = inspector.view
+
+            // Apply preset
+            inspector.applyPreset(preset)
+
+            // Verify transition matches preset
+            XCTAssertEqual(inspector.currentTransition.type, preset.transitionType)
+            XCTAssertEqual(inspector.currentTransition.parameters, preset.parameters)
+            XCTAssertEqual(inspector.currentTransition.duration.seconds, preset.duration.seconds, accuracy: 0.01)
+        }
+    }
 }
