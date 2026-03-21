@@ -181,6 +181,9 @@ final class TimelineView: MTKView {
     /// Editor state for data synchronization
     weak var editorState: EditorState?
 
+    /// Timeline view model for drag-drop operations
+    private var viewModel: TimelineViewModel?
+
     private var commandQueue: MTLCommandQueue?
     private var renderPipelineState: MTLRenderPipelineState?
 
@@ -596,6 +599,7 @@ final class TimelineView: MTKView {
     /// Configure timeline with editor state
     func configure(with editorState: EditorState) {
         self.editorState = editorState
+        self.viewModel = TimelineViewModel(editorState: editorState)
         self.duration = editorState.duration
 
         // Initialize subviews if not already done
@@ -1146,6 +1150,103 @@ extension TimelineView: EffectMarkerTrackViewDelegate {
                 editorState?.effectStack.videoEffects[index] = effect
             }
         }
+    }
+}
+
+// MARK: - NSDraggingDestination
+
+extension TimelineView {
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        guard sender.draggingPasteboard?.availableTypes?.contains(
+            NSPasteboard.PasteboardType("com.openscreen.transitionType")
+        ) ?? false else {
+            return []
+        }
+
+        return .copy
+    }
+
+    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        // Read transition type from pasteboard
+        guard let transitionTypeString = sender.draggingPasteboard?.string(
+            forType: NSPasteboard.PasteboardType("com.openscreen.transitionType")
+        ),
+              let transitionType = TransitionType(rawValue: transitionTypeString) else {
+            return false
+        }
+
+        // Find clips at drop location
+        let dropPoint = sender.draggingLocation
+        guard let (leadingClip, trailingClip) = findClipsAt(point: dropPoint) else {
+            showAlert(message: "Can only add transitions between two overlapping clips")
+            return false
+        }
+
+        // Validate overlap
+        let overlapDuration = calculateOverlap(leading: leadingClip, trailing: trailingClip)
+
+        guard overlapDuration >= TransitionValidator.minimumDuration else {
+            showAlert(message: "Clips must overlap by at least \(CMTimeGetSeconds(TransitionValidator.minimumDuration))s")
+            return false
+        }
+
+        // Check if transition already exists
+        if let editorState = editorState,
+           editorState.transitions.contains(where: {
+            $0.leadingClipID == leadingClip.id && $0.trailingClipID == trailingClip.id
+           }) {
+            showAlert(message: "Transition already exists between these clips")
+            return false
+        }
+
+        // Create transition
+        let transition = TransitionClip(
+            type: transitionType,
+            duration: min(overlapDuration, CMTime(seconds: 1.0, preferredTimescale: 600)),
+            leadingClipID: leadingClip.id,
+            trailingClipID: trailingClip.id,
+            parameters: TransitionParameters.default(for: transitionType),
+            isEnabled: true
+        )
+
+        // Add to EditorState
+        editorState?.addTransition(transition)
+
+        return true
+    }
+
+    /// Finds overlapping clips at a given point in the timeline
+    private func findClipsAt(point: CGPoint) -> (VideoClip, VideoClip)? {
+        guard let editorState = editorState else { return nil }
+
+        // Convert point to time
+        let timeAtPoint = xPositionToTime(point.x)
+        let pointTime = CMTime(seconds: timeAtPoint, preferredTimescale: 600)
+
+        // Find clips at this time across all tracks
+        var clipsAtTime: [VideoClip] = []
+        for track in editorState.clipTracks {
+            for clip in track.clips {
+                if pointTime >= clip.timeRangeInTimeline.start &&
+                   pointTime <= clip.timeRangeInTimeline.end {
+                    clipsAtTime.append(clip)
+                }
+            }
+        }
+
+        // Need exactly 2 overlapping clips
+        guard clipsAtTime.count == 2 else { return nil }
+
+        // Sort by start time to determine leading vs trailing
+        let sortedClips = clipsAtTime.sorted { $0.timeRangeInTimeline.start < $1.timeRangeInTimeline.start }
+        let leadingClip = sortedClips[0]
+        let trailingClip = sortedClips[1]
+
+        // Validate they actually overlap
+        let overlapDuration = calculateOverlap(leading: leadingClip, trailing: trailingClip)
+        guard overlapDuration > CMTime.zero else { return nil }
+
+        return (leadingClip, trailingClip)
     }
 }
 
