@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreMedia
+import AppKit
 
 /// SwiftUI view for rendering a clip track with clips and transitions overlay
 struct ClipTrackView: View {
@@ -24,6 +25,21 @@ struct ClipTrackView: View {
     /// State for showing transition creation alert
     @State private var transitionAlertMessage: String?
 
+    /// State for auto-transition prompt
+    @State private var showAutoTransitionPrompt: Bool = false
+
+    /// Detected overlap for auto-prompt
+    @State private var detectedOverlap: ClipOverlap?
+
+    /// Timestamp when auto-prompt was last dismissed (for cooldown)
+    @State private var lastPromptDismissTime: Date?
+
+    /// Cooldown duration: 5 minutes
+    private let promptCooldown: TimeInterval = 5 * 60
+
+    /// Minimum overlap for prompt: 0.5 seconds
+    private let minimumPromptOverlap: CMTime = CMTime(seconds: 0.5, preferredTimescale: 600)
+
     var body: some View {
         ZStack {
             // Existing clips rendering
@@ -31,6 +47,11 @@ struct ClipTrackView: View {
 
             // Transitions overlay
             transitionsOverlay
+
+            // Auto-transition prompt overlay
+            if showAutoTransitionPrompt, let overlap = detectedOverlap {
+                autoTransitionPromptOverlay(for: overlap)
+            }
         }
         .contextMenu {
             createTransitionSubmenu()
@@ -41,6 +62,14 @@ struct ClipTrackView: View {
             }
         } message: { message in
             Text(message)
+        }
+        .onAppear {
+            // Check for overlaps when view appears
+            checkForOverlapPrompt()
+        }
+        .onChange(of: track.clips.count) { _ in
+            // Check for overlaps when clips change
+            checkForOverlapPrompt()
         }
     }
 
@@ -174,6 +203,132 @@ struct ClipTrackView: View {
 
         // Note: Inspector opening will be handled by a separate coordinator
         // For now, the transition is created and selected
+    }
+
+    // MARK: - Auto-Transition Prompt
+
+    /// Checks if auto-transition prompt should be shown
+    private func shouldShowAutoPrompt() -> Bool {
+        // Check cooldown
+        if let lastDismiss = lastPromptDismissTime {
+            let timeSinceDismiss = Date().timeIntervalSince(lastDismiss)
+            if timeSinceDismiss < promptCooldown {
+                return false
+            }
+        }
+
+        // Find overlapping clips
+        guard let overlap = findFirstOverlap() else {
+            return false
+        }
+
+        // Check overlap duration (minimum 0.5 seconds)
+        guard overlap.overlapDuration >= minimumPromptOverlap else {
+            return false
+        }
+
+        // Check if transition already exists
+        if viewModel.transition(between: overlap.leadingClip.id, and: overlap.trailingClip.id) != nil {
+            return false
+        }
+
+        return true
+    }
+
+    /// Finds the first overlapping clip pair in the track
+    private func findFirstOverlap() -> ClipOverlap? {
+        let detector = ClipOverlapDetector()
+        let overlaps = detector.detectOverlaps(clips: track.clips)
+        return overlaps.first
+    }
+
+    /// Checks for overlaps and shows prompt if conditions are met
+    func checkForOverlapPrompt() {
+        guard shouldShowAutoPrompt() else {
+            return
+        }
+
+        guard let overlap = findFirstOverlap() else {
+            return
+        }
+
+        detectedOverlap = overlap
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            showAutoTransitionPrompt = true
+        }
+    }
+
+    /// Shows the auto-transition prompt
+    func showAutoPrompt() {
+        guard let overlap = findFirstOverlap() else {
+            return
+        }
+
+        detectedOverlap = overlap
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            showAutoTransitionPrompt = true
+        }
+    }
+
+    /// Hides the auto-transition prompt
+    func hideAutoPrompt() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            showAutoTransitionPrompt = false
+        }
+        lastPromptDismissTime = Date()
+        detectedOverlap = nil
+    }
+
+    /// Applies default transition (Quick Dissolve)
+    func applyDefaultTransition() {
+        guard let overlap = detectedOverlap else {
+            return
+        }
+
+        // Create Quick Dissolve transition
+        let quickDissolve = BuiltInPresets.presets.first { $0.name == "Quick Dissolve" }
+        guard let preset = quickDissolve else {
+            return
+        }
+
+        let transition = preset.makeTransition(
+            leadingClipID: overlap.leadingClip.id,
+            trailingClipID: overlap.trailingClip.id
+        )
+
+        // Add to EditorState
+        viewModel.editorState.addTransition(transition)
+
+        // Select the newly created transition
+        viewModel.selectTransition(transition.id)
+
+        // Hide prompt
+        hideAutoPrompt()
+    }
+
+    /// Auto-transition prompt overlay view
+    @ViewBuilder
+    private func autoTransitionPromptOverlay(for overlap: ClipOverlap) -> some View {
+        GeometryReader { geometry in
+            // Calculate position: 60px above overlap zone
+            let overlapCenter = overlap.centerPoint
+            // TODO: Convert CMTime to x-position using timeline's pixels-per-second
+            // For now, center horizontally in visible area
+            let xPosition = geometry.size.width / 2
+            let yPosition: CGFloat = -60 // 60px above track
+
+            AutoTransitionPrompt(
+                overlap: overlap,
+                onApplyDissolve: {
+                    applyDefaultTransition()
+                },
+                onDismiss: {
+                    hideAutoPrompt()
+                }
+            )
+            .position(x: xPosition, y: yPosition)
+            .transition(.scale.combined(with: .opacity))
+        }
     }
 }
 
