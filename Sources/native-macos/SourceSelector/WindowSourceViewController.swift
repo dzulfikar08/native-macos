@@ -284,6 +284,13 @@ final class WindowSourceViewController: NSViewController {
 
         updateCompositingMode()
         startButton.isEnabled = !selectedWindows.isEmpty
+
+        // Start or stop tracking based on selection
+        if !selectedWindows.isEmpty {
+            windowTracker?.startTracking(windowIDs: Array(selectedWindows))
+        } else {
+            windowTracker?.stopTracking()
+        }
     }
 
     @objc private func qualityPresetChanged() {
