@@ -1,7 +1,7 @@
 import Foundation
 
 /// The type of video transition effect
-enum TransitionType: Codable, Sendable {
+enum TransitionType: Codable, Sendable, Equatable {
     /// Crossfade dissolve between clips
     case crossfade
 
@@ -70,14 +70,14 @@ enum TransitionType: Codable, Sendable {
         }
     }
 
-    /// All built-in transition types (excludes custom)
-    static var builtInCases: [TransitionType] {
-        return [.crossfade, .fadeToColor, .wipe, .iris, .blinds]
+    /// All standard (non-custom) transition types
+    static var allStandardTypes: [TransitionType] {
+        [.crossfade, .fadeToColor, .wipe, .iris, .blinds]
     }
 }
 
-/// Explicit Equatable conformance for TransitionType
-extension TransitionType: Equatable {
+// MARK: - Equatable
+extension TransitionType {
     static func == (lhs: TransitionType, rhs: TransitionType) -> Bool {
         switch (lhs, rhs) {
         case (.crossfade, .crossfade),
@@ -86,10 +86,75 @@ extension TransitionType: Equatable {
              (.iris, .iris),
              (.blinds, .blinds):
             return true
-        case (.custom(let n1), .custom(let n2)):
-            return n1 == n2
+        case (.custom(let lhsName), .custom(let rhsName)):
+            return lhsName == rhsName
         default:
             return false
+        }
+    }
+}
+
+// MARK: - Codable
+extension TransitionType {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case customName
+    }
+
+    private enum BaseType: String, Codable {
+        case crossfade
+        case fadeToColor
+        case wipe
+        case iris
+        case blinds
+        case custom
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .crossfade:
+            try container.encode(BaseType.crossfade.rawValue, forKey: .type)
+        case .fadeToColor:
+            try container.encode(BaseType.fadeToColor.rawValue, forKey: .type)
+        case .wipe:
+            try container.encode(BaseType.wipe.rawValue, forKey: .type)
+        case .iris:
+            try container.encode(BaseType.iris.rawValue, forKey: .type)
+        case .blinds:
+            try container.encode(BaseType.blinds.rawValue, forKey: .type)
+        case .custom(let name):
+            try container.encode(BaseType.custom.rawValue, forKey: .type)
+            try container.encode(name, forKey: .customName)
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let typeString = try container.decode(String.self, forKey: .type)
+
+        guard let baseType = BaseType(rawValue: typeString) else {
+            throw DecodingError.dataCorruptedError(
+                forKey: .type,
+                in: container,
+                debugDescription: "Invalid transition type: \(typeString)"
+            )
+        }
+
+        switch baseType {
+        case .crossfade:
+            self = .crossfade
+        case .fadeToColor:
+            self = .fadeToColor
+        case .wipe:
+            self = .wipe
+        case .iris:
+            self = .iris
+        case .blinds:
+            self = .blinds
+        case .custom:
+            let name = try container.decode(String.self, forKey: .customName)
+            self = .custom(name)
         }
     }
 }
