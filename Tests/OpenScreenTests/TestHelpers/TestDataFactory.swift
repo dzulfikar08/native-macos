@@ -245,10 +245,128 @@ enum TestDataFactory {
         )
     }
 
-    /// Creates overlapping clips for testing transitions
-    static func makeOverlappingClips() -> (leading: VideoClip, trailing: VideoClip, overlapDuration: CMTime) {
-        let overlapDuration = CMTime(seconds: 1.0, preferredTimescale: 600)
+    // MARK: - Enhanced Transition Helpers
 
+    /// Creates a basic transition with full parameter control
+    static func makeTransition(
+        type: TransitionType = .crossfade,
+        duration: CMTime = CMTime(seconds: 1.0, preferredTimescale: 600),
+        leadingClipID: UUID = UUID(),
+        trailingClipID: UUID = UUID(),
+        parameters: TransitionParameters? = nil,
+        isEnabled: Bool = true
+    ) -> TransitionClip {
+        return TransitionClip(
+            type: type,
+            duration: duration,
+            leadingClipID: leadingClipID,
+            trailingClipID: trailingClipID,
+            parameters: parameters,
+            isEnabled: isEnabled
+        )
+    }
+
+    /// Creates a crossfade transition with specified duration
+    static func makeCrossfadeTransition(
+        duration: CMTime = CMTime(seconds: 1.0, preferredTimescale: 600)
+    ) -> TransitionClip {
+        return makeTransition(
+            type: .crossfade,
+            duration: duration
+        )
+    }
+
+    /// Creates a fade to color transition
+    static func makeFadeToColorTransition(
+        color: TransitionColor = .black,
+        holdDuration: Double = 0.5,
+        duration: CMTime = CMTime(seconds: 1.5, preferredTimescale: 600)
+    ) -> TransitionClip {
+        return makeTransition(
+            type: .fadeToColor,
+            duration: duration,
+            parameters: .fadeToColor(color: color, holdDuration: holdDuration)
+        )
+    }
+
+    /// Creates a wipe transition with specified parameters
+    static func makeWipeTransition(
+        direction: WipeDirection = .left,
+        softness: Double = 0.2,
+        borderWidth: Double = 0.0,
+        duration: CMTime = CMTime(seconds: 1.0, preferredTimescale: 600)
+    ) -> TransitionClip {
+        return makeTransition(
+            type: .wipe,
+            duration: duration,
+            parameters: .wipe(direction: direction, softness: softness, borderWidth: borderWidth)
+        )
+    }
+
+    /// Creates an iris transition with specified parameters
+    static func makeIrisTransition(
+        shape: IrisShape = .circle,
+        position: CGPoint = CGPoint(x: 0.5, y: 0.5),
+        softness: Double = 0.3,
+        duration: CMTime = CMTime(seconds: 1.5, preferredTimescale: 600)
+    ) -> TransitionClip {
+        return makeTransition(
+            type: .iris,
+            duration: duration,
+            parameters: .iris(shape: shape, position: position, softness: softness)
+        )
+    }
+
+    /// Creates a blinds transition with specified parameters
+    static func makeBlindsTransition(
+        orientation: BlindsOrientation = .vertical,
+        slatCount: Int = 10,
+        duration: CMTime = CMTime(seconds: 1.0, preferredTimescale: 600)
+    ) -> TransitionClip {
+        return makeTransition(
+            type: .blinds,
+            duration: duration,
+            parameters: .blinds(orientation: orientation, slatCount: slatCount)
+        )
+    }
+
+    // MARK: - Edge Case Transition Helpers
+
+    /// Creates a transition with invalid (too long) duration
+    static func makeTransitionWithInvalidDuration() -> TransitionClip {
+        // Duration exceeds typical maximum (e.g., 10 seconds)
+        return makeTransition(
+            type: .crossfade,
+            duration: CMTime(seconds: 10.0, preferredTimescale: 600)
+        )
+    }
+
+    /// Creates a transition with minimum valid duration (0.1 seconds)
+    static func makeTransitionWithMinimumDuration() -> TransitionClip {
+        return makeTransition(
+            type: .crossfade,
+            duration: CMTime(seconds: 0.1, preferredTimescale: 600)
+        )
+    }
+
+    /// Creates a custom transition with custom parameters
+    static func makeTransitionWithCustomParameters() -> TransitionClip {
+        return makeTransition(
+            type: .custom("myCustomTransition"),
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            parameters: .custom(parameters: ["param1": 1.0, "param2": 2.0])
+        )
+    }
+
+    // MARK: - VideoClip + Transition Helpers
+
+    /// Creates overlapping clips with a valid transition
+    /// Leading clip: 0-5s, Trailing clip: 3-8s (2s overlap), Transition: 1s duration
+    static func makeOverlappingClipsWithTransition() -> (
+        leading: VideoClip,
+        trailing: VideoClip,
+        transition: TransitionClip
+    ) {
         let leadingClip = VideoClip(
             name: "Leading Clip",
             asset: makeTestAVAsset(duration: 5.0),
@@ -271,13 +389,66 @@ enum TestDataFactory {
                 end: CMTime(seconds: 5.0, preferredTimescale: 600)
             ),
             timeRangeInTimeline: CMTimeRange(
-                start: CMTime(seconds: 4.0, preferredTimescale: 600),
-                end: CMTime(seconds: 9.0, preferredTimescale: 600)
+                start: CMTime(seconds: 3.0, preferredTimescale: 600),
+                end: CMTime(seconds: 8.0, preferredTimescale: 600)
             ),
             trackID: UUID()
         )
 
-        return (leadingClip, trailingClip, overlapDuration)
+        let transition = makeTransition(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: leadingClip.id,
+            trailingClipID: trailingClip.id
+        )
+
+        return (leadingClip, trailingClip, transition)
+    }
+
+    /// Creates non-overlapping clips with an invalid transition
+    /// Leading clip: 0-3s, Trailing clip: 4-7s (no overlap), Transition: 1s duration
+    /// This configuration should fail validation
+    static func makeNonOverlappingClipsWithTransition() -> (
+        leading: VideoClip,
+        trailing: VideoClip,
+        transition: TransitionClip
+    ) {
+        let leadingClip = VideoClip(
+            name: "Leading Clip",
+            asset: makeTestAVAsset(duration: 3.0),
+            timeRangeInSource: CMTimeRange(
+                start: .zero,
+                end: CMTime(seconds: 3.0, preferredTimescale: 600)
+            ),
+            timeRangeInTimeline: CMTimeRange(
+                start: .zero,
+                end: CMTime(seconds: 3.0, preferredTimescale: 600)
+            ),
+            trackID: UUID()
+        )
+
+        let trailingClip = VideoClip(
+            name: "Trailing Clip",
+            asset: makeTestAVAsset(duration: 3.0),
+            timeRangeInSource: CMTimeRange(
+                start: .zero,
+                end: CMTime(seconds: 3.0, preferredTimescale: 600)
+            ),
+            timeRangeInTimeline: CMTimeRange(
+                start: CMTime(seconds: 4.0, preferredTimescale: 600),
+                end: CMTime(seconds: 7.0, preferredTimescale: 600)
+            ),
+            trackID: UUID()
+        )
+
+        let transition = makeTransition(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: leadingClip.id,
+            trailingClipID: trailingClip.id
+        )
+
+        return (leadingClip, trailingClip, transition)
     }
 
     /// Creates a sequence of clips for testing
