@@ -196,6 +196,18 @@ extension TimelineViewModel {
         guard let id = selectedTransitionID else { return nil }
         return transitions.first { $0.id == id }
     }
+
+    /// Returns transition between two specific clips
+    /// - Parameters:
+    ///   - clipID1: First clip ID
+    ///   - clipID2: Second clip ID
+    /// - Returns: Transition between the clips, if it exists
+    func transition(between clipID1: UUID, and clipID2: UUID) -> TransitionClip? {
+        return transitions.first { transition in
+            (transition.leadingClipID == clipID1 && transition.trailingClipID == clipID2) ||
+            (transition.leadingClipID == clipID2 && transition.trailingClipID == clipID1)
+        }
+    }
 }
 
 // MARK: - Transition Actions
