@@ -27,16 +27,25 @@ final class TimelineViewModel: ObservableObject {
     @Published private(set) var transitions: [TransitionClip] = []
 
     /// Currently selected transition ID
-    @Published private(set) var selectedTransitionID: UUID?
+    @Published private(set) var selectedTransitionID: UUID? {
+        didSet { objectWillChange.send() }
+    }
 
     /// Currently dragging transition (for duration adjustment)
-    @Published private(set) var draggingTransitionID: UUID?
+    @Published private(set) var draggingTransitionID: UUID? {
+        didSet { objectWillChange.send() }
+    }
 
     /// Drag handle being dragged (leading or trailing edge)
-    @Published private(set) var draggingTransitionEdge: TransitionEdge?
+    @Published private(set) var draggingTransitionEdge: TransitionEdge? {
+        didSet { objectWillChange.send() }
+    }
 
     /// Original duration before drag (for cancellation)
     private var originalTransitionDuration: CMTime = .zero
+
+    /// Layout cache for transition positioning
+    private(set) var transitionLayoutCache: TransitionLayoutCache
 
     /// Edges of a transition that can be dragged
     enum TransitionEdge {
@@ -49,6 +58,7 @@ final class TimelineViewModel: ObservableObject {
     init(editorState: EditorState) {
         self.editorState = editorState
         self.playheadPosition = .zero
+        self.transitionLayoutCache = TransitionLayoutCache()
 
         // Sync transitions from editor state
         syncTransitions()
@@ -191,9 +201,7 @@ extension TimelineViewModel {
     func selectTransition(_ id: UUID) {
         selectedTransitionID = id
         // Deselect clips when transition selected
-        if !selectedClipIDs.isEmpty {
-            selectedClipIDs = []
-        }
+        selectedClipIDs = []
     }
 
     /// Deselects all transitions

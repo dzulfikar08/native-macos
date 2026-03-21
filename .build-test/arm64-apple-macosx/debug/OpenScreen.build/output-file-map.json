@@ -1,0 +1,677 @@
+{
+  "": {
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/master.swiftdeps"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/App/AppDelegate.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AppDelegate.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AppDelegate.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AppDelegate.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/App/ErrorPresenter.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ErrorPresenter.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ErrorPresenter.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ErrorPresenter~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ErrorPresenter.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ErrorPresenter.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/App/ResourceCoordinator.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ResourceCoordinator.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ResourceCoordinator.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ResourceCoordinator~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ResourceCoordinator.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ResourceCoordinator.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/App/WindowManager.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowManager.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowManager.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowManager.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowManager.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/EditorWindowController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorWindowController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorWindowController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorWindowController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorWindowController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/EffectsPanel.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectsPanel.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectsPanel.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectsPanel~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectsPanel.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectsPanel.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/ExportCompositionBuilder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ExportCompositionBuilder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ExportCompositionBuilder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ExportCompositionBuilder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ExportCompositionBuilder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ExportCompositionBuilder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/MarkersPanel.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MarkersPanel.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MarkersPanel.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MarkersPanel~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MarkersPanel.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MarkersPanel.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/MetalRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MetalRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MetalRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MetalRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MetalRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MetalRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/TransitionExportPipeline.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionExportPipeline.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionExportPipeline.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionExportPipeline~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionExportPipeline.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionExportPipeline.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/VideoExporter.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoExporter.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoExporter.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoExporter~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoExporter.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoExporter.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/VideoPreview.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoPreview.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoPreview.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoPreview~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoPreview.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoPreview.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Editing/VideoProcessor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoProcessor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoProcessor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoProcessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoProcessor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoProcessor.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/AudioEffect.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffect.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffect.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffect~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffect.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffect.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/AudioEffectProcessor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffectProcessor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffectProcessor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffectProcessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffectProcessor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioEffectProcessor.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/EffectPreset.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectPreset.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectPreset.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectPreset~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectPreset.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectPreset.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/PresetStorage.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PresetStorage.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PresetStorage.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PresetStorage~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PresetStorage.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PresetStorage.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/VideoEffect.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffect.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffect.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffect~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffect.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffect.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Effects/VideoEffectProcessor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffectProcessor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffectProcessor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffectProcessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffectProcessor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoEffectProcessor.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/ChangeSpeedOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChangeSpeedOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChangeSpeedOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChangeSpeedOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChangeSpeedOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChangeSpeedOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/DeleteClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/DuplicateClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DuplicateClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DuplicateClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DuplicateClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DuplicateClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DuplicateClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/MoveClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MoveClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MoveClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MoveClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MoveClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MoveClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/SplitClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SplitClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SplitClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SplitClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SplitClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SplitClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/TransitionOperations/CreateTransitionOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CreateTransitionOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CreateTransitionOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CreateTransitionOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CreateTransitionOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CreateTransitionOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/TransitionOperations/DeleteTransitionOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteTransitionOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteTransitionOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteTransitionOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteTransitionOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DeleteTransitionOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/TransitionOperations/ModifyTransitionOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ModifyTransitionOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ModifyTransitionOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ModifyTransitionOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ModifyTransitionOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ModifyTransitionOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Operations/TrimClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TrimClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TrimClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TrimClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TrimClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TrimClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/AudioMixer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioMixer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioMixer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioMixer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioMixer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioMixer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/HUDWindowController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HUDWindowController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HUDWindowController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HUDWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HUDWindowController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HUDWindowController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/MiniRecordingView.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MiniRecordingView.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MiniRecordingView.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MiniRecordingView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MiniRecordingView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/MiniRecordingView.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/PipCompositor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PipCompositor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PipCompositor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PipCompositor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PipCompositor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PipCompositor.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/Recorder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recorder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recorder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recorder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recorder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recorder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/RecordingController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/ScreenRecorder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenRecorder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenRecorder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenRecorder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenRecorder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenRecorder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/WebcamRecorder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecorder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecorder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecorder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecorder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecorder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/WindowRecorder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecorder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecorder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecorder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecorder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecorder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Recording/WindowTracker.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowTracker.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowTracker.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowTracker~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowTracker.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowTracker.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Errors/RecordingError.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingError.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingError.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingError~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingError.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/RecordingError.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Models/EditorState.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorState.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorState.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorState~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorState.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EditorState.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Models/Recording.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recording.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recording.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recording~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recording.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/Recording.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Models/TimelineModels.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineModels.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineModels.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineModels~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineModels.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineModels.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Models/WindowState.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowState.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowState.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowState~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowState.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowState.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Utilities/FileUtils.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FileUtils.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FileUtils.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FileUtils~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FileUtils.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FileUtils.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Shared/Utilities/TimeUtils.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimeUtils.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimeUtils.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimeUtils~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimeUtils.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimeUtils.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/CameraDevice.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CameraDevice.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CameraDevice.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CameraDevice~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CameraDevice.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CameraDevice.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/DisplayItem.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DisplayItem.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DisplayItem.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DisplayItem~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DisplayItem.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DisplayItem.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/SourceSelection.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelection.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelection.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelection~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelection.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelection.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/VideoMetadata.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoMetadata.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoMetadata.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoMetadata~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoMetadata.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoMetadata.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/WebcamRecordingSettings.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecordingSettings.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecordingSettings.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecordingSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecordingSettings.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamRecordingSettings.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/WindowDevice.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowDevice.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowDevice.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowDevice~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowDevice.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowDevice.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Models/WindowRecordingSettings.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecordingSettings.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecordingSettings.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecordingSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecordingSettings.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowRecordingSettings.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/ScreenSourceViewController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenSourceViewController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenSourceViewController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenSourceViewController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenSourceViewController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScreenSourceViewController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/SourceSelectorWindowController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelectorWindowController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelectorWindowController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelectorWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelectorWindowController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/SourceSelectorWindowController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/Utils/VideoValidator.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoValidator.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoValidator.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoValidator~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoValidator.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoValidator.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/VideoImportViewController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoImportViewController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoImportViewController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoImportViewController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoImportViewController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoImportViewController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/WebcamSourceViewController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamSourceViewController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamSourceViewController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamSourceViewController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamSourceViewController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WebcamSourceViewController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/SourceSelector/WindowSourceViewController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowSourceViewController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowSourceViewController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowSourceViewController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowSourceViewController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WindowSourceViewController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/AudioWaveformGenerator.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioWaveformGenerator.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioWaveformGenerator.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioWaveformGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioWaveformGenerator.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AudioWaveformGenerator.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ChapterMarker.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarker.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarker.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarker~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarker.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarker.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ChapterMarkerTrackView.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarkerTrackView.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarkerTrackView.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarkerTrackView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarkerTrackView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ChapterMarkerTrackView.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ClipError.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipError.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipError.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipError~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipError.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipError.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ClipManager.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipManager.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipManager.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipManager.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipManager.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ClipOperation.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipOperation.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipOperation.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipOperation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipOperation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipOperation.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ClipTrack.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipTrack.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipTrack.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipTrack~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipTrack.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipTrack.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/EffectMarkerTrackView.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectMarkerTrackView.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectMarkerTrackView.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectMarkerTrackView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectMarkerTrackView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/EffectMarkerTrackView.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/JKLController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/JKLController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/JKLController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/JKLController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/JKLController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/JKLController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/LoopRegion.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegion.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegion.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegion~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegion.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegion.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/LoopRegionView.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegionView.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegionView.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegionView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegionView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/LoopRegionView.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/NotificationExtensions.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/NotificationExtensions.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/NotificationExtensions.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/NotificationExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/NotificationExtensions.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/NotificationExtensions.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/PlaybackControls.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PlaybackControls.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PlaybackControls.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PlaybackControls~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PlaybackControls.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/PlaybackControls.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ScrubController.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScrubController.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScrubController.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScrubController~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScrubController.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ScrubController.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ShuttleWheelControl.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ShuttleWheelControl.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ShuttleWheelControl.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ShuttleWheelControl~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ShuttleWheelControl.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ShuttleWheelControl.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/ThumbnailCache.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ThumbnailCache.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ThumbnailCache.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ThumbnailCache~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ThumbnailCache.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ThumbnailCache.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/TimelineColor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineColor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineColor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineColor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineColor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineColor.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/TimelineEditMode.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineEditMode.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineEditMode.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineEditMode~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineEditMode.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineEditMode.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/TimelineView.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineView.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineView.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TimelineView.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Timeline/VideoClip.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoClip.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoClip.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoClip~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoClip.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/VideoClip.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Models/TransitionClip.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionClip.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionClip.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionClip~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionClip.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionClip.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Models/TransitionError.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionError.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionError.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionError~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionError.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionError.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Models/TransitionParameters.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionParameters.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionParameters.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionParameters~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionParameters.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionParameters.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Models/TransitionType.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionType.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionType.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionType~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionType.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionType.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/AVVideoCompositionBuilder.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AVVideoCompositionBuilder.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AVVideoCompositionBuilder.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AVVideoCompositionBuilder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AVVideoCompositionBuilder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/AVVideoCompositionBuilder.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/BlindsRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/BlindsRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/BlindsRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/BlindsRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/BlindsRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/BlindsRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/CrossfadeRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CrossfadeRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CrossfadeRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CrossfadeRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CrossfadeRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CrossfadeRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/FadeToColorRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FadeToColorRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FadeToColorRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FadeToColorRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FadeToColorRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/FadeToColorRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/IrisRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/IrisRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/IrisRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/IrisRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/IrisRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/IrisRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/TransitionRenderContext.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionRenderContext.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionRenderContext.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionRenderContext~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionRenderContext.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionRenderContext.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Rendering/WipeRenderer.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WipeRenderer.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WipeRenderer.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WipeRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WipeRenderer.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/WipeRenderer.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Utilities/TransitionFactory.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionFactory.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionFactory.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionFactory.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionFactory.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/Transitions/Utilities/TransitionValidator.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionValidator.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionValidator.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionValidator~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionValidator.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/TransitionValidator.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/UndoRedo/ClipUndoManager.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipUndoManager.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipUndoManager.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipUndoManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipUndoManager.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/ClipUndoManager.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/UndoRedo/CoalescingStrategy.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CoalescingStrategy.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CoalescingStrategy.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CoalescingStrategy~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CoalescingStrategy.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/CoalescingStrategy.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/UndoRedo/HistoryLimit.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HistoryLimit.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HistoryLimit.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HistoryLimit~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HistoryLimit.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/HistoryLimit.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/Sources/native-macos/main.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/main.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/main.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/main.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/main.dia"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/DerivedSources/resource_bundle_accessor.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/resource_bundle_accessor.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/resource_bundle_accessor.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/resource_bundle_accessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/resource_bundle_accessor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreen.build/resource_bundle_accessor.dia"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/master.swiftdeps"
+  },
+  "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/runner.d",
+    "object": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/macbookpro/Documents/Personal/openscreen/native-macos/.build-test/arm64-apple-macosx/debug/OpenScreenPackageTests.build/runner.dia"
+  }
+}
