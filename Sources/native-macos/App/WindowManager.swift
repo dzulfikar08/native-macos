@@ -147,6 +147,33 @@ final class WindowManager {
                     }
                 }
 
+            case .window(let windows, let settings):
+                print("✅ Selected \(windows.count) window(s)")
+
+                Task { @MainActor in
+                    let config = WindowRecorder.Config(
+                        windowIDs: windows.map(\.id),
+                        settings: settings
+                    )
+
+                    let recorder = WindowRecorder()
+                    do {
+                        self.showHUD()
+
+                        guard let recordingController = self.getRecordingController() else {
+                            print("⚠️ RecordingController not available")
+                            self.transition(to: .idle)
+                            return
+                        }
+
+                        let url = try await recordingController.startRecording(with: recorder, config: config)
+                        await self.handleRecordingStarted(url)
+                    } catch {
+                        await self.handleRecordingError(error)
+                        self.errorPresenter.presentCritical(error, from: window)
+                    }
+                }
+
             case .videoFile(let url):
                 print("✅ Selected video file: \(url.lastPathComponent)")
 
