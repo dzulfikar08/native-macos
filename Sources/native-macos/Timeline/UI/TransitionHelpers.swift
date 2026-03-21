@@ -48,3 +48,43 @@ func calculateOverlap(leading: VideoClip, trailing: VideoClip) -> CMTime {
 
     return max(CMTime(seconds: 0, preferredTimescale: 600), leadingEnd - trailingStart)
 }
+
+/// Finds the two clips that overlap at a given point in the timeline
+/// - Parameters:
+///   - point: Point in timeline coordinate space
+///   - viewModel: TimelineViewModel containing clips
+/// - Returns: Tuple of (leadingClip, trailingClip) if point is between two overlapping clips
+///
+/// TODO: This function requires the following TimelineViewModel methods:
+/// - `selectedTrack` property (or equivalent)
+/// - `time(at:)` method to convert CGPoint → CMTime
+///
+/// Once TimelineViewModel has these methods, implement as:
+/// ```swift
+/// func findClipsAt(point: CGPoint, in viewModel: TimelineViewModel) -> (VideoClip, VideoClip)? {
+///     let timeAtPoint = viewModel.time(at: point)
+///     guard let track = viewModel.selectedTrack else { return nil }
+///
+///     let clipsAtTime = track.clips.filter { clip in
+///         timeAtPoint >= clip.timeRangeInTimeline.start &&
+///         timeAtPoint <= clip.timeRangeInTimeline.end
+///     }
+///
+///     guard clipsAtTime.count == 2 else { return nil }
+///
+///     let leadingClip = clipsAtTime.min(by: { $0.timeRangeInTimeline.start < $1.timeRangeInTimeline.start })
+///     let trailingClip = clipsAtTime.max(by: { $0.timeRangeInTimeline.start < $1.timeRangeInTimeline.start })
+///
+///     guard let leading = leadingClip, let trailing = trailingClip else { return nil }
+///
+///     let overlapDuration = trailing.timeRangeInTimeline.end - leading.timeRangeInTimeline.start
+///     guard overlapDuration >= TransitionValidator.minimumDuration else { return nil }
+///
+///     return (leading, trailing)
+/// }
+/// ```
+func findClipsAt(point: CGPoint, in viewModel: TimelineViewModel) -> (VideoClip, VideoClip)? {
+    // TODO: Implement once TimelineViewModel has time(at:) and selectedTrack
+    // See documentation above for planned implementation
+    return nil
+}
