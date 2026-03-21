@@ -106,7 +106,8 @@ struct TransitionClip: Codable, Sendable, Equatable {
 
     /// Returns a new transition with the specified duration
     func withDuration(_ newDuration: CMTime) -> TransitionClip {
-        TransitionClip(
+        precondition(newDuration.seconds > 0, "Transition duration must be positive")
+        return TransitionClip(
             id: id,
             type: type,
             duration: newDuration,

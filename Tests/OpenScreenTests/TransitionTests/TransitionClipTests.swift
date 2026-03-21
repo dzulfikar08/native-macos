@@ -94,17 +94,19 @@ final class TransitionClipTests: XCTestCase {
     }
 
     func testInvalidTransitionWithInvalidParameters() {
-        var transition = TransitionClip(
+        let transition = TransitionClip(
             type: .wipe,
             duration: CMTime(seconds: 1.0, preferredTimescale: 600),
             leadingClipID: UUID(),
             trailingClipID: UUID()
         )
 
-        // Set invalid parameters
-        transition.parameters = .wipe(direction: .left, softness: 2.0, borderWidth: 0)
+        // Create transition with invalid parameters
+        let invalidTransition = transition.withParameters(
+            .wipe(direction: .left, softness: 2.0, borderWidth: 0)
+        )
 
-        XCTAssertFalse(transition.isValid)
+        XCTAssertFalse(invalidTransition.isValid)
     }
 
     func testInvalidTransitionWithSameClipIDs() {
