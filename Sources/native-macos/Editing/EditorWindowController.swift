@@ -389,6 +389,41 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
         }
     }
 
+    // MARK: - Inspector
+
+    /// Opens the transition inspector as a sheet
+    /// - Parameter transitionID: ID of transition to inspect
+    func showTransitionInspector(for transitionID: UUID) {
+        guard let transition = editorState.transitions.first(where: { $0.id == transitionID }) else {
+            print("⚠️ Transition not found: \(transitionID)")
+            return
+        }
+
+        let inspector = TransitionInspectorViewController(
+            transition: transition,
+            onApply: { [weak self] updatedTransition in
+                // Update the transition in editor state
+                self?.editorState.updateTransition(updatedTransition)
+            },
+            onDelete: { [weak self] in
+                // Delete the transition from editor state
+                self?.editorState.removeTransition(id: transitionID)
+            }
+        )
+
+        inspector.preferredContentSize = NSSize(width: 400, height: 500)
+
+        // Present as sheet on the window
+        window?.beginSheet(inspector.window!) { [weak self] response in
+            guard let self = self, response == .OK else {
+                return
+            }
+
+            // Update editor state if changed
+            self.editorState.objectWillChange.send()
+        }
+    }
+
     enum RenderingError: LocalizedError {
         case deviceNotAvailable
         case textureCacheNotAvailable
