@@ -12,15 +12,10 @@ final class EffectsPanel: NSView {
     // UI Components
     private var tabView: NSTabView!
     private var transitionsViewController: TransitionsPaletteViewController!
+    private var visualEffectView: NSVisualEffectView!
 
     // Expose components for testing
     var tabViewForTesting: NSTabView { tabView }
-
-    private var visualEffectView: NSVisualEffectView!
-
-    // Data
-    private var currentPreset: EffectPreset?
-    private var customPresets: [EffectPreset] = []
 
     // MARK: - Initialization
 
