@@ -108,6 +108,12 @@ enum PresetError: LocalizedError {
     case duplicateName(String)
     case tooManyPresets(Int)
     case cannotModifyBuiltIn
+    case reservedName
+    case saveFailed(reason: String)
+    case diskFull
+    case invalidFile
+    case incompatibleVersion
+    case thumbnailGenerationFailed
 
     var errorDescription: String? {
         switch self {
@@ -119,6 +125,18 @@ enum PresetError: LocalizedError {
             return "Maximum \(max) custom presets allowed"
         case .cannotModifyBuiltIn:
             return "Cannot modify built-in presets"
+        case .reservedName:
+            return "This name is reserved for built-in presets"
+        case .saveFailed(let reason):
+            return "Failed to save preset: \(reason)"
+        case .diskFull:
+            return "Not enough disk space to save preset"
+        case .invalidFile:
+            return "The selected file is not a valid preset"
+        case .incompatibleVersion:
+            return "This preset is from an incompatible version"
+        case .thumbnailGenerationFailed:
+            return "Failed to generate preset thumbnail"
         }
     }
 }
