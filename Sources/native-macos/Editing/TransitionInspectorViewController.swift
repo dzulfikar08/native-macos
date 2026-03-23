@@ -375,9 +375,58 @@ final class TransitionInspectorViewController: NSViewController {
     }
 
     private func setupPresetsTab() {
+        // Create container view
+        let containerView = NSView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Create save button
+        let saveButton = NSButton(title: "+ Save as Preset...", target: self, action: #selector(saveAsPresetClicked))
+        saveButton.bezelStyle = .rounded
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+
+        // Add subviews
+        containerView.addSubview(presetsScrollView)
+        containerView.addSubview(saveButton)
+
+        // Setup constraints
+        NSLayoutConstraint.activate([
+            presetsScrollView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            presetsScrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            presetsScrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            presetsScrollView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -8),
+
+            saveButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
+            saveButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
+
         let viewController = NSViewController()
-        viewController.view = presetsScrollView
+        viewController.view = containerView
         presetsTabView.viewController = viewController
+    }
+
+    @objc private func saveAsPresetClicked() {
+        Task {
+            let saveSheet = SavePresetSheet()
+            saveSheet.transition = transition
+            saveSheet.availableFolders = Array(PresetLibrary().folders)
+
+            do {
+                let result = try await saveSheet.show()
+                // Create the preset
+                let library = PresetLibrary()
+                try? library.loadCustomPresets()
+                try library.savePreset(
+                    name: result.name,
+                    folder: result.folder,
+                    transition: transition,
+                    isFavorite: false
+                )
+            } catch {
+                // Handle cancellation or errors silently
+            }
+        }
     }
 
     private func setupPreviewTab() {
