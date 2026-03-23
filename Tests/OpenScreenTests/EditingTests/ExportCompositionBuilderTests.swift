@@ -89,4 +89,112 @@ final class ExportCompositionBuilderTests: XCTestCase {
         XCTAssertNotNil(composition)
         XCTAssertGreaterThan(composition!.instructions.count, 0)
     }
+
+    // MARK: - Quality Settings Tests
+
+    func testBuildForExportWithDefaultQuality() async throws {
+        let editorState = EditorState.createTestState()
+
+        let clips = TestDataFactory.makeOverlappingClipsSequence(count: 2)
+        let track = TestDataFactory.makeTestClipTrack(clips: clips)
+        editorState.clipTracks = [track]
+
+        // Add transition
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: clips[0].id,
+            trailingClipID: clips[1].id
+        )
+        editorState.addTransition(transition)
+
+        let builder = ExportCompositionBuilder()
+        let composition = try await builder.buildForExport(from: editorState)
+
+        XCTAssertNotNil(composition)
+        // Default quality is .good (1920x1080)
+        XCTAssertEqual(composition!.renderSize.width, 1920)
+        XCTAssertEqual(composition!.renderSize.height, 1080)
+    }
+
+    func testBuildForExportWithDraftQuality() async throws {
+        let editorState = EditorState.createTestState()
+
+        let clips = TestDataFactory.makeOverlappingClipsSequence(count: 2)
+        let track = TestDataFactory.makeTestClipTrack(clips: clips)
+        editorState.clipTracks = [track]
+
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: clips[0].id,
+            trailingClipID: clips[1].id
+        )
+        editorState.addTransition(transition)
+
+        let builder = ExportCompositionBuilder()
+        let composition = try await builder.buildForExport(from: editorState, quality: .draft)
+
+        XCTAssertNotNil(composition)
+        // Draft quality is 1280x720
+        XCTAssertEqual(composition!.renderSize.width, 1280)
+        XCTAssertEqual(composition!.renderSize.height, 720)
+    }
+
+    func testBuildForExportWithBestQuality() async throws {
+        let editorState = EditorState.createTestState()
+
+        let clips = TestDataFactory.makeOverlappingClipsSequence(count: 2)
+        let track = TestDataFactory.makeTestClipTrack(clips: clips)
+        editorState.clipTracks = [track]
+
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: clips[0].id,
+            trailingClipID: clips[1].id
+        )
+        editorState.addTransition(transition)
+
+        let builder = ExportCompositionBuilder()
+        let composition = try await builder.buildForExport(from: editorState, quality: .best)
+
+        XCTAssertNotNil(composition)
+        // Best quality uses source resolution (from first clip's asset)
+        // Test video is 1920x1080, so we expect that
+        XCTAssertEqual(composition!.renderSize.width, 1920)
+        XCTAssertEqual(composition!.renderSize.height, 1080)
+    }
+
+    func testBuildForExportWithCustomQuality() async throws {
+        let editorState = EditorState.createTestState()
+
+        let clips = TestDataFactory.makeOverlappingClipsSequence(count: 2)
+        let track = TestDataFactory.makeTestClipTrack(clips: clips)
+        editorState.clipTracks = [track]
+
+        let transition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1.0, preferredTimescale: 600),
+            leadingClipID: clips[0].id,
+            trailingClipID: clips[1].id
+        )
+        editorState.addTransition(transition)
+
+        // Create custom quality setting with different resolution
+        let customQuality = ExportQualitySettings(
+            preset: .custom,
+            renderSize: CGSize(width: 2560, height: 1440),
+            bitrate: 20,
+            antiAliasing: .multiSample
+        )
+
+        let builder = ExportCompositionBuilder()
+        let composition = try await builder.buildForExport(from: editorState, quality: customQuality)
+
+        XCTAssertNotNil(composition)
+        // Custom quality should use specified render size
+        XCTAssertEqual(composition!.renderSize.width, 2560)
+        XCTAssertEqual(composition!.renderSize.height, 1440)
+    }
 }

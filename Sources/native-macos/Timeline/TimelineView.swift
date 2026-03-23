@@ -1168,10 +1168,10 @@ extension TimelineView {
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         // Read transition type from pasteboard
-        guard let transitionTypeString = sender.draggingPasteboard?.string(
+        guard let transitionTypeString = sender.draggingPasteboard.string(
             forType: NSPasteboard.PasteboardType("com.openscreen.transitionType")
         ),
-              let transitionType = TransitionType(rawValue: transitionTypeString) else {
+              let transitionType = TransitionType(from: transitionTypeString) else {
             return false
         }
 

@@ -29,13 +29,29 @@ final class TransitionVideoCompositor: NSObject, AVVideoCompositing {
 
     /// Called by export pipeline before composition starts
     /// - Parameter state: The editor state containing transitions
+    @MainActor
     static func setEditorState(_ state: EditorState) {
         _editorState = state
+        // Cache transitions for thread-safe access
+        _transitionsLock.lock()
+        _transitionsCache = state.transitions
+        _transitionsLock.unlock()
     }
 
     /// Called after export completes
     static func clearEditorState() {
         _editorState = nil
+        _transitionsLock.lock()
+        _transitionsCache = []
+        _transitionsLock.unlock()
+    }
+
+    /// Thread-safe getter for cached transitions
+    /// - Returns: Cached transitions array
+    private static func getTransitions() -> [TransitionClip] {
+        _transitionsLock.lock()
+        defer { _transitionsLock.unlock() }
+        return _transitionsCache
     }
 
     /// Thread-safe getter for editor state
@@ -61,6 +77,10 @@ final class TransitionVideoCompositor: NSObject, AVVideoCompositing {
         }
     }
     private nonisolated(unsafe) static var __editorState: EditorState?
+
+    // Store a copy of transitions for thread-safe access
+    private nonisolated(unsafe) static var _transitionsCache: [TransitionClip] = []
+    private static let _transitionsLock = NSLock()
 
     // MARK: - AVVideoCompositing
 
@@ -106,8 +126,9 @@ final class TransitionVideoCompositor: NSObject, AVVideoCompositing {
                 )
             }
 
-            // Look up transition by ID from editor state
-            guard let transition = state.transitions.first(where: { $0.id == instruction.transitionID }) else {
+            // Look up transition by ID from cached transitions
+            let transitions = Self.getTransitions()
+            guard let transition = transitions.first(where: { $0.id == instruction.transitionID }) else {
                 throw TransitionError.clipsNotFound(
                     leadingClipID: instruction.transitionID,
                     trailingClipID: nil

@@ -13,12 +13,17 @@ final class ExportCompositionBuilder {
     }
 
     /// Builds a video composition for export from editor state
-    /// - Parameter editorState: The editor state
+    /// - Parameters:
+    ///   - editorState: The editor state
+    ///   - quality: Quality settings for export (default: .good)
     /// - Returns: Video composition for export
     /// - Throws: ExportError if composition cannot be built or is invalid
-    func buildForExport(from editorState: EditorState) async throws -> AVVideoComposition {
-        // Build base composition
-        guard let composition = try compositionBuilder.buildComposition(for: editorState) else {
+    func buildForExport(
+        from editorState: EditorState,
+        quality: ExportQualitySettings = .good
+    ) async throws -> AVVideoComposition {
+        // Build base composition with quality settings
+        guard let composition = try compositionBuilder.buildComposition(for: editorState, quality: quality) else {
             throw ExportError.noVideoTracks
         }
 
