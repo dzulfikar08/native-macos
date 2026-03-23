@@ -25,6 +25,9 @@ final class VideoExporter: NSObject, ObservableObject {
     /// Video composition to apply during export
     private var videoComposition: AVVideoComposition?
 
+    /// Quality settings for export
+    private let quality: ExportQualitySettings
+
     /// Progress interval in seconds for progress updates
     private let progressInterval: TimeInterval = 0.1
 
@@ -34,15 +37,16 @@ final class VideoExporter: NSObject, ObservableObject {
     /// - Parameters:
     ///   - asset: The AVAsset to export
     ///   - outputURL: URL where the exported video will be saved
-    ///   - exportPreset: AVAssetExportPreset to use for export quality
+    ///   - quality: Export quality settings (defaults to .good)
     init(
         asset: AVAsset,
         outputURL: URL,
-        exportPreset: String = AVAssetExportPresetHighestQuality
+        quality: ExportQualitySettings = .good
     ) {
         self.asset = asset
         self.outputURL = outputURL
-        self.exportPreset = exportPreset
+        self.quality = quality
+        self.exportPreset = Self.mapQualityToPreset(quality)
         super.init()
 
         // Cleanup any existing export session
@@ -158,6 +162,26 @@ final class VideoExporter: NSObject, ObservableObject {
     }
 
     // MARK: - Private Methods
+
+    /// Maps quality settings to AVAssetExportPreset
+    /// - Parameter quality: Export quality settings
+    /// - Returns: Appropriate AVAssetExportPreset
+    /// - Note: Anti-aliasing is controlled by quality.antiAliasing in the renderer.
+    ///   Custom bitrate (quality.bitrate) is not currently supported by AVAssetExportSession.
+    ///   Custom renderSize (quality.renderSize) is handled by AVVideoComposition, not the export preset.
+    private static func mapQualityToPreset(_ quality: ExportQualitySettings) -> String {
+        switch quality.preset {
+        case .draft:
+            return AVAssetExportPreset640x480
+        case .good:
+            return AVAssetExportPreset1920x1080
+        case .best:
+            return AVAssetExportPreset3840x2160
+        case .custom:
+            // Use highest quality for custom, anti-aliasing will be applied in renderer
+            return AVAssetExportPresetHighestQuality
+        }
+    }
 
     private func createExportSession() throws -> AVAssetExportSession {
         guard let exportSession = AVAssetExportSession(

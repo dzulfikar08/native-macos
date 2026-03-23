@@ -50,14 +50,65 @@ final class VideoExporterTests: XCTestCase {
         XCTAssertEqual(videoExporter.currentProgress, 0.0)
     }
 
-    func testVideoExporterCustomPresetInitialization() {
-        let customPreset = AVAssetExportPresetMediumQuality
+    func testVideoExporterWithDraftQuality() {
+        let draftExporter = VideoExporter(
+            asset: testAsset,
+            outputURL: testURL,
+            quality: .draft
+        )
+        XCTAssertNotNil(draftExporter)
+        XCTAssertFalse(draftExporter.isCurrentlyExporting)
+        XCTAssertEqual(draftExporter.currentProgress, 0.0)
+    }
+
+    func testVideoExporterWithGoodQuality() {
+        let goodExporter = VideoExporter(
+            asset: testAsset,
+            outputURL: testURL,
+            quality: .good
+        )
+        XCTAssertNotNil(goodExporter)
+        XCTAssertFalse(goodExporter.isCurrentlyExporting)
+        XCTAssertEqual(goodExporter.currentProgress, 0.0)
+    }
+
+    func testVideoExporterWithBestQuality() {
+        let bestExporter = VideoExporter(
+            asset: testAsset,
+            outputURL: testURL,
+            quality: .best
+        )
+        XCTAssertNotNil(bestExporter)
+        XCTAssertFalse(bestExporter.isCurrentlyExporting)
+        XCTAssertEqual(bestExporter.currentProgress, 0.0)
+    }
+
+    func testVideoExporterWithCustomQuality() {
+        let customQuality = ExportQualitySettings(
+            preset: .custom,
+            renderSize: CGSize(width: 2560, height: 1440),
+            bitrate: 20,
+            antiAliasing: .multiSample
+        )
         let customExporter = VideoExporter(
             asset: testAsset,
             outputURL: testURL,
-            exportPreset: customPreset
+            quality: customQuality
         )
         XCTAssertNotNil(customExporter)
+        XCTAssertFalse(customExporter.isCurrentlyExporting)
+        XCTAssertEqual(customExporter.currentProgress, 0.0)
+    }
+
+    func testVideoExporterDefaultQualityIsGood() {
+        // Default quality should be .good (1920x1080)
+        let defaultExporter = VideoExporter(
+            asset: testAsset,
+            outputURL: testURL
+        )
+        XCTAssertNotNil(defaultExporter)
+        XCTAssertFalse(defaultExporter.isCurrentlyExporting)
+        XCTAssertEqual(defaultExporter.currentProgress, 0.0)
     }
 
     // MARK: - Export State Tests
