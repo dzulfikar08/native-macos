@@ -12,6 +12,16 @@ final class TransitionVideoCompositionInstruction: AVVideoCompositionInstruction
     let leadingTrackID: CMPersistentTrackID
     let trailingTrackID: CMPersistentTrackID
 
+    // Override to provide custom time range
+    override var timeRange: CMTimeRange {
+        CMTimeRange(start: transitionStart, end: CMTimeAdd(transitionStart, transitionDuration))
+    }
+
+    // Override to enable post-processing
+    override var enablePostProcessing: Bool {
+        true
+    }
+
     init(
         transitionID: UUID,
         transitionType: String,
@@ -27,9 +37,7 @@ final class TransitionVideoCompositionInstruction: AVVideoCompositionInstruction
         self.leadingTrackID = leadingTrackID
         self.trailingTrackID = trailingTrackID
 
-        // Initialize with default time range
         super.init()
-        // enablePostProcessing is read-only, defaults to false
     }
 
     // Required initializer for NSCoding compliance
