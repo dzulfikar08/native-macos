@@ -20,6 +20,8 @@ enum BuiltInPresets {
         TransitionPreset(
             id: presetUUID(name: "quick-dissolve"),
             name: "Quick Dissolve",
+            folder: "",
+            isFavorite: false,
             isBuiltIn: true,
             transitionType: .crossfade,
             parameters: .crossfade,
@@ -30,6 +32,8 @@ enum BuiltInPresets {
         TransitionPreset(
             id: presetUUID(name: "slow-fade"),
             name: "Slow Fade",
+            folder: "",
+            isFavorite: false,
             isBuiltIn: true,
             transitionType: .fadeToColor,
             parameters: .fadeToColor(color: .black, holdDuration: 0.5),
@@ -40,6 +44,8 @@ enum BuiltInPresets {
         TransitionPreset(
             id: presetUUID(name: "wipe-left"),
             name: "Wipe Left",
+            folder: "",
+            isFavorite: false,
             isBuiltIn: true,
             transitionType: .wipe,
             parameters: .wipe(direction: .left, softness: 0.2, borderWidth: 0),
@@ -50,6 +56,8 @@ enum BuiltInPresets {
         TransitionPreset(
             id: presetUUID(name: "circle-reveal"),
             name: "Circle Reveal",
+            folder: "",
+            isFavorite: false,
             isBuiltIn: true,
             transitionType: .iris,
             parameters: .iris(shape: .circle, position: CGPoint(x: 0.5, y: 0.5), softness: 0.3),
@@ -60,6 +68,8 @@ enum BuiltInPresets {
         TransitionPreset(
             id: presetUUID(name: "vertical-blinds"),
             name: "Vertical Blinds",
+            folder: "",
+            isFavorite: false,
             isBuiltIn: true,
             transitionType: .blinds,
             parameters: .blinds(orientation: .vertical, slatCount: 10),

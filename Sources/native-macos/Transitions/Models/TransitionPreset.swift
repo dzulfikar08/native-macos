@@ -6,6 +6,8 @@ struct TransitionPreset: Identifiable, Equatable, Codable, Sendable {
     let id: UUID
     let name: String
     let isBuiltIn: Bool
+    let folder: String
+    let isFavorite: Bool
     let transitionType: TransitionType
     let parameters: TransitionParameters
     let duration: CMTime
@@ -13,6 +15,8 @@ struct TransitionPreset: Identifiable, Equatable, Codable, Sendable {
     init(
         id: UUID = UUID(),
         name: String,
+        folder: String = "",
+        isFavorite: Bool = false,
         isBuiltIn: Bool = false,
         transitionType: TransitionType,
         parameters: TransitionParameters,
@@ -20,6 +24,8 @@ struct TransitionPreset: Identifiable, Equatable, Codable, Sendable {
     ) {
         self.id = id
         self.name = name
+        self.folder = folder
+        self.isFavorite = isFavorite
         self.isBuiltIn = isBuiltIn
         self.transitionType = transitionType
         self.parameters = parameters
