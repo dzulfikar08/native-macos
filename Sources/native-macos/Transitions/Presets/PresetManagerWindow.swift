@@ -1,5 +1,6 @@
 import Cocoa
 import Combine
+import CoreMedia
 
 /// Dedicated library management interface for presets
 @MainActor
@@ -228,7 +229,28 @@ final class PresetManagerWindow: NSWindowController {
 
     /// Create new folder
     func createFolder(name: String) {
-        library.folders.insert(name)
+        // Create a temporary preset to register the folder
+        let dummyTransition = TransitionClip(
+            type: .crossfade,
+            duration: CMTime(seconds: 1, preferredTimescale: 600),
+            leadingClipID: UUID(),
+            trailingClipID: UUID(),
+            parameters: .crossfade,
+            isEnabled: true
+        )
+
+        try? library.savePreset(
+            name: "_temp_folder_\(UUID().uuidString)",
+            folder: name,
+            transition: dummyTransition,
+            isFavorite: false
+        )
+
+        // Remove the temporary preset
+        if let tempPreset = library.allPresets.first(where: { $0.name.hasPrefix("_temp_folder_") }) {
+            try? library.deletePreset(tempPreset)
+        }
+
         outlineView.reloadData()
     }
 }
@@ -270,8 +292,7 @@ extension PresetManagerWindow: NSToolbarDelegate {
             NSToolbarItem.Identifier("NewFolder"),
             NSToolbarItem.Identifier("Import"),
             NSToolbarItem.Identifier("Export"),
-            NSToolbarItem.Identifier.flexibleSpace,
-            NSToolbarItem.Identifier.printItem
+            NSToolbarItem.Identifier.flexibleSpace
         ]
     }
 

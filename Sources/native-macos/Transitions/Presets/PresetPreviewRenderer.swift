@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 import CoreMedia
 import AppKit
-import Metal
+import CoreVideo
 
 /// Generates thumbnails for transition presets
 struct PresetPreviewRenderer {
@@ -13,12 +13,20 @@ struct PresetPreviewRenderer {
     /// In-memory thumbnail cache
     private var thumbnailCache: [UUID: CIImage] = [:]
 
+    /// Preview renderer for generating thumbnails
+    private let previewRenderer = TransitionPreviewRenderer()
+
     /// Generate thumbnail for a preset
     func generateThumbnail(for preset: TransitionPreset) throws -> CIImage {
-        // Get renderer from context
-        guard let renderer = TransitionRenderContext.shared.renderer(for: preset.transitionType) else {
-            throw PresetError.thumbnailGenerationFailed
-        }
+        // Create test transition clip
+        let transition = TransitionClip(
+            type: preset.transitionType,
+            duration: preset.duration,
+            leadingClipID: UUID(),
+            trailingClipID: UUID(),
+            parameters: preset.parameters,
+            isEnabled: true
+        )
 
         // Create test frames (solid colors: red leading, blue trailing)
         let leadingColor = CIColor(red: 1, green: 0, blue: 0)
@@ -28,23 +36,21 @@ struct PresetPreviewRenderer {
         let trailingImage = CIImage(color: trailingColor).cropped(to: CGRect(x: 0, y: 0, width: 640, height: 480))
 
         // Render at midpoint (progress = 0.5)
-        let rendered = renderer.render(
-            leading: leadingImage,
-            trailing: trailingImage,
-            parameters: preset.parameters,
+        guard let rendered = previewRenderer.applyTransition(
+            from: leadingImage,
+            to: trailingImage,
+            transition: transition,
             progress: 0.5
-        )
-
-        guard let thumbnail = rendered else {
+        ) else {
             throw PresetError.thumbnailGenerationFailed
         }
 
         // Scale to thumbnail size
-        let scaleX = Self.thumbnailSize.width / thumbnail.extent.width
-        let scaleY = Self.thumbnailSize.height / thumbnail.extent.height
+        let scaleX = Self.thumbnailSize.width / rendered.extent.width
+        let scaleY = Self.thumbnailSize.height / rendered.extent.height
         let scale = min(scaleX, scaleY)
 
-        let scaledThumbnail = thumbnail.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+        let scaledThumbnail = rendered.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
 
         return scaledThumbnail
     }

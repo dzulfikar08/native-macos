@@ -115,7 +115,7 @@ final class PresetCardView: NSView {
     }
 
     override func mouseDown(with event: NSEvent) {
-        super.mouseDown(with:)
+        super.mouseDown(with: event)
 
         if event.clickCount == 2 {
             onTap?()

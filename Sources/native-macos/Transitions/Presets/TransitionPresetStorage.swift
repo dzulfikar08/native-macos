@@ -113,7 +113,9 @@ struct TransitionPresetStorage {
         }
 
         guard let image = NSImage(contentsOf: fileURL),
-              let cgImage = image.cgImage(forProposedRect: nil, hints: nil) else {
+              let imageData = image.tiffRepresentation,
+              let bitmap = NSBitmapImageRep(data: imageData),
+              let cgImage = bitmap.cgImage else {
             return nil
         }
 
