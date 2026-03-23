@@ -459,7 +459,9 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
         menu.addItem(cancelItem)
 
         // Show menu at cursor location
-        menu.popUp(positioning: nil, at: CGPoint(x: point.x, y: NSHeight((window?.screen?.frame ?? .zero) - point.y)), in: nil)
+        let screenFrame = window?.screen?.frame ?? .zero
+        let invertedY = screenFrame.height - point.y
+        menu.popUp(positioning: nil, at: CGPoint(x: point.x, y: invertedY), in: nil)
     }
 
     /// Creates transition from menu selection
@@ -483,7 +485,7 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
         editorState.addTransition(transition)
 
         // Select the newly created transition
-        timelineView.viewModel?.selectTransition(transition.id)
+        editorState.selectedTransitionID = transition.id
 
         print("✅ Created transition: \(info.type.displayName) between clips")
     }
@@ -554,7 +556,18 @@ final class EditorWindowController: NSWindowController, PlaybackControlsDelegate
         inspector.preferredContentSize = NSSize(width: 400, height: 500)
 
         // Present as sheet on the window
-        window?.beginSheet(inspector.window!) { [weak self] response in
+        guard let window = self.window else { return }
+
+        // Create a sheet window for the view controller
+        let sheetWindow = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 500),
+            styleMask: [.titled, .closable],
+            backing: .buffered,
+            defer: false
+        )
+        sheetWindow.contentViewController = inspector
+
+        window.beginSheet(sheetWindow) { [weak self] response in
             guard let self = self, response == .OK else {
                 return
             }

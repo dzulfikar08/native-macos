@@ -38,6 +38,30 @@ enum TransitionType: Codable, Sendable, Equatable {
         }
     }
 
+    /// Initialize from raw value string
+    /// - Parameter rawValue: The raw string value
+    init?(rawValue: String) {
+        if rawValue.hasPrefix("custom:") {
+            let name = String(rawValue.dropFirst(7)) // Remove "custom:" prefix
+            self = .custom(name)
+        } else {
+            switch rawValue {
+            case "crossfade":
+                self = .crossfade
+            case "fadeToColor":
+                self = .fadeToColor
+            case "wipe":
+                self = .wipe
+            case "iris":
+                self = .iris
+            case "blinds":
+                self = .blinds
+            default:
+                return nil
+            }
+        }
+    }
+
     /// Human-readable name for the transition type
     var displayName: String {
         switch self {

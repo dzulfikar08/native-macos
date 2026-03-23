@@ -182,7 +182,7 @@ final class TimelineView: MTKView {
     weak var editorState: EditorState?
 
     /// Timeline view model for drag-drop operations
-    private var viewModel: TimelineViewModel?
+    var viewModel: TimelineViewModel?
 
     private var commandQueue: MTLCommandQueue?
     private var renderPipelineState: MTLRenderPipelineState?
@@ -1157,9 +1157,8 @@ extension TimelineView: EffectMarkerTrackViewDelegate {
 
 extension TimelineView {
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        guard sender.draggingPasteboard?.availableTypes?.contains(
-            NSPasteboard.PasteboardType("com.openscreen.transitionType")
-        ) ?? false else {
+        let pasteboard = sender.draggingPasteboard
+        guard pasteboard.types?.contains(NSPasteboard.PasteboardType("com.openscreen.transitionType")) ?? false else {
             return []
         }
 
@@ -1168,10 +1167,9 @@ extension TimelineView {
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         // Read transition type from pasteboard
-        guard let transitionTypeString = sender.draggingPasteboard.string(
-            forType: NSPasteboard.PasteboardType("com.openscreen.transitionType")
-        ),
-              let transitionType = TransitionType(from: transitionTypeString) else {
+        let pasteboard = sender.draggingPasteboard
+        guard let transitionTypeString = pasteboard.string(forType: NSPasteboard.PasteboardType("com.openscreen.transitionType")),
+              let transitionType = TransitionType(rawValue: transitionTypeString) else {
             return false
         }
 
