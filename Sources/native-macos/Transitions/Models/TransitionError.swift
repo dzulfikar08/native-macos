@@ -1,6 +1,25 @@
 import Foundation
 import CoreMedia
 
+/// Warnings that can occur during transition validation
+enum TransitionWarning: Equatable {
+    /// Transition duration is unusually long
+    case durationTooLong
+
+    /// Transition overlap exceeds duration
+    case overlapExceedsDuration
+
+    /// Parameter value is at extreme edge of valid range
+    case extremeParameterValue(String)
+}
+
+/// Result of transition validation
+struct ValidationResult: Equatable {
+    let isValid: Bool
+    let errors: [TransitionError]
+    let warnings: [TransitionWarning]
+}
+
 /// Errors that can occur during transition operations
 enum TransitionError: LocalizedError, Equatable {
     /// Transition duration exceeds available clip overlap
