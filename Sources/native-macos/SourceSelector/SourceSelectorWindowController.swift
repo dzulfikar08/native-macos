@@ -44,7 +44,7 @@ final class SourceSelectorWindowController: NSWindowController {
         screenTab.label = "Screen"
         screenTab.image = NSImage(systemSymbolName: "display", accessibilityDescription: "Screen")
 
-        // Create window source tab (placeholder for Phase 4)
+        // Create window source tab
         let windowVC = WindowSourceViewController()
         let windowTab = NSTabViewItem(viewController: windowVC)
         windowTab.label = "Window"
@@ -81,6 +81,11 @@ final class SourceSelectorWindowController: NSWindowController {
         screenVC.onSelectionChanged = { [weak self] displayItem in
             guard let self = self, let item = displayItem else { return }
             self.onSourceSelected?(.screen(displayID: item.id, displayName: item.name))
+        }
+
+        // Handle window selection via callback
+        windowVC.onSourceSelected = { [weak self] selection in
+            self?.onSourceSelected?(selection)
         }
     }
 
