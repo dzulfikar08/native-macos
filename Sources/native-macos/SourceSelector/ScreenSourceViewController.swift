@@ -20,12 +20,14 @@ final class ScreenSourceViewController: NSViewController {
     /// Enumerates all online displays and returns them as display items
     /// - Returns: Array of DisplayItem objects representing connected displays
     func enumerateDisplays() -> [DisplayItem] {
+        print("🔍 Starting display enumeration...")
         var result: [DisplayItem] = []
         let maxDisplays: UInt32 = 32
         var displayIDs = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
         var displayCount: UInt32 = 0
 
         let error = CGGetOnlineDisplayList(maxDisplays, &displayIDs, &displayCount)
+        print("🔍 CGGetOnlineDisplayList result: \(error), displayCount: \(displayCount)")
 
         guard error == .success else {
             print("⚠️ Failed to enumerate displays: \(error)")
@@ -43,6 +45,8 @@ final class ScreenSourceViewController: NSViewController {
             let width = CGDisplayPixelsWide(displayID)
             let height = CGDisplayPixelsHigh(displayID)
 
+            print("📺 Display \(i): ID=\(displayID), Name=\(name), Size=\(width)x\(height)")
+
             let item = DisplayItem(
                 id: displayID,
                 name: name,
@@ -54,6 +58,7 @@ final class ScreenSourceViewController: NSViewController {
         }
 
         displays = result
+        print("✅ Found \(result.count) display(s)")
         return result
     }
 
@@ -99,7 +104,46 @@ final class ScreenSourceViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Enumerate displays when view loads
-        _ = enumerateDisplays()
+        // Check permissions first
+        checkPermissions()
+    }
+
+    // MARK: - Permissions
+
+    private func checkPermissions() {
+        let status = CGPreflightScreenCaptureAccess()
+        print("🔍 Screen capture permission status: \(status)")
+
+        if !status {
+            print("❌ Permission denied, showing alert")
+            showPermissionDeniedAlert()
+        } else {
+            print("✅ Permission granted, enumerating displays")
+            // Enumerate displays when permission is granted
+            let displays = enumerateDisplays()
+            print("📺 Found \(displays.count) display(s)")
+        }
+    }
+
+    private func showPermissionDeniedAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Screen Recording Access Required"
+        alert.informativeText = "OpenScreen needs screen recording permission to enumerate displays. After granting permission, click Retry to continue."
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Open System Settings")
+        alert.addButton(withTitle: "Retry")
+        alert.addButton(withTitle: "Cancel")
+
+        let response = alert.runModal()
+
+        if response == .alertFirstButtonReturn {
+            // Open System Settings
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture") {
+                NSWorkspace.shared.open(url)
+            }
+        } else if response == .alertSecondButtonReturn {
+            // Retry - check permissions again
+            checkPermissions()
+        }
     }
 }
