@@ -14,9 +14,13 @@ struct PresetPreviewRenderer {
     private var thumbnailCache: [UUID: CIImage] = [:]
 
     /// Preview renderer for generating thumbnails
-    private let previewRenderer = TransitionPreviewRenderer()
+    @MainActor
+    private var previewRenderer: TransitionPreviewRenderer {
+        TransitionPreviewRenderer()
+    }
 
     /// Generate thumbnail for a preset
+    @MainActor
     func generateThumbnail(for preset: TransitionPreset) throws -> CIImage {
         // Create test transition clip
         let transition = TransitionClip(

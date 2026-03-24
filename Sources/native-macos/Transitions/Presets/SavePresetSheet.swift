@@ -67,7 +67,7 @@ final class SavePresetSheet: NSWindowController {
             folderPopUpButton.addItem(withTitle: folder)
         }
 
-        folderPopUpButton.addItem(withSeparator: NSMenuItem.separator())
+        folderPopUpButton.menu?.addItem(NSMenuItem.separator())
 
         let newItem = NSMenuItem(title: "New Folder...", action: #selector(showNewFolderAlert), keyEquivalent: "")
         newItem.target = self
@@ -97,8 +97,8 @@ final class SavePresetSheet: NSWindowController {
         }
 
         // Focus the input field
-        DispatchQueue.main.async {
-            window?.makeFirstResponder(input)
+        DispatchQueue.main.async { [weak self] in
+            self?.window?.makeFirstResponder(input)
         }
     }
 
@@ -112,7 +112,7 @@ final class SavePresetSheet: NSWindowController {
 }
 
 extension SavePresetSheet: NSWindowDelegate {
-    func windowDidLoad() {
+    override func windowDidLoad() {
         super.windowDidLoad()
 
         guard let window = self.window else { return }
@@ -194,8 +194,9 @@ extension SavePresetSheet: NSWindowDelegate {
         ])
 
         // Focus name field on load
-        DispatchQueue.main.async {
-            window.makeFirstResponder(nameTextField)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.window?.makeFirstResponder(self.nameTextField)
         }
     }
 

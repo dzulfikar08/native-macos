@@ -288,12 +288,12 @@ struct TransitionValidator {
         var warnings: [TransitionWarning] = []
 
         switch parameters {
-        case .wipe(_, let softness, let border):
+        case .wipe(_, let softness, let borderWidth):
             if softness < 0 || softness > 1 {
                 warnings.append(.extremeParameterValue("softness"))
             }
-            if border < 0 || border > 20 {
-                warnings.append(.extremeParameterValue("border"))
+            if borderWidth < 0 || borderWidth > 20 {
+                warnings.append(.extremeParameterValue("borderWidth"))
             }
 
         case .iris(_, let position, let softness):
@@ -311,6 +311,9 @@ struct TransitionValidator {
 
         case .crossfade, .fadeToColor:
             break // No parameters to validate
+
+        case .custom:
+            break // Cannot validate custom parameters
         }
 
         return warnings
@@ -321,10 +324,10 @@ struct TransitionValidator {
     /// - Returns: Clamped parameters
     func clampParameters(_ parameters: TransitionParameters) -> TransitionParameters {
         switch parameters {
-        case .wipe(let direction, let softness, let border):
+        case .wipe(let direction, let softness, let borderWidth):
             let clampedSoftness = max(0.0, min(1.0, softness))
-            let clampedBorder = max(0.0, min(20.0, border))
-            return .wipe(direction: direction, softness: clampedSoftness, border: clampedBorder)
+            let clampedBorder = max(0.0, min(20.0, borderWidth))
+            return .wipe(direction: direction, softness: clampedSoftness, borderWidth: clampedBorder)
 
         case .iris(let shape, let position, let softness):
             let clampedSoftness = max(0.0, min(1.0, softness))
@@ -337,6 +340,9 @@ struct TransitionValidator {
             return .blinds(orientation: orientation, slatCount: clampedSlatCount)
 
         case .crossfade, .fadeToColor:
+            return parameters
+
+        case .custom:
             return parameters
         }
     }

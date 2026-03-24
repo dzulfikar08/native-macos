@@ -382,7 +382,8 @@ extension PresetManagerWindow: NSOutlineViewDelegate {
     }
 
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        if let selected = outlineView.selectedRow as? Int {
+        let selected = outlineView.selectedRow
+        if selected >= 0 {
             let item = outlineView.item(atRow: selected) as? String ?? "All"
             selectedFolder = item
         }
