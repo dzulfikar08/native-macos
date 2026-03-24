@@ -60,6 +60,7 @@ struct PresetPreviewRenderer {
     }
 
     /// Load or generate thumbnail (uses cache)
+    @MainActor
     mutating func thumbnail(
         for preset: TransitionPreset,
         storage: TransitionPresetStorage
@@ -91,6 +92,7 @@ struct PresetPreviewRenderer {
     }
 
     /// Get fallback icon for transition type
+    @MainActor
     private func fallbackIcon(for type: TransitionType) -> CIImage? {
         // Create simple icon based on type
         let size = Self.thumbnailSize

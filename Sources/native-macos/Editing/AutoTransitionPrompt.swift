@@ -139,7 +139,6 @@ struct AutoTransitionPrompt: View {
 
 // MARK: - Mock Data for Preview
 
-#if DEBUG
 extension VideoClip {
     static let mock = VideoClip(
         name: "Mock Clip",
@@ -155,4 +154,3 @@ extension VideoClip {
         trackID: UUID()
     )
 }
-#endif
