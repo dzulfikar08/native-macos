@@ -73,121 +73,17 @@ final class WindowManager {
 
     /// Shows the source selector window
     func showSourceSelector() {
-        let sourceSelector = SourceSelectorWindowController()
+        sourceSelectorWindowController = SourceSelectorWindowController()
 
-        // Get parent window (or create a temporary one)
-        let parentWindow = NSApp.windows.first { $0.canBecomeMain }
-
-        guard let window = parentWindow else {
-            print("⚠️ No parent window available for sheet")
+        guard let window = sourceSelectorWindowController?.window else {
+            print("⚠️ Source selector window not available")
             return
         }
 
-        sourceSelector.presentAsSheet(on: window) { [weak self] selection in
-            guard let self = self else { return }
-
-            switch selection {
-            case .screen(let displayID, let displayName):
-                print("✅ Selected display: \(displayName) (ID: \(displayID))")
-
-                // Show HUD and start recording with selected display
-                Task { @MainActor in
-                    // Setup first, then transition after successful setup
-                    self.showHUD()
-
-                    guard let recordingController = self.getRecordingController() else {
-                        print("⚠️ RecordingController not available")
-                        // Rollback to idle state on setup failure
-                        self.transition(to: .idle)
-                        return
-                    }
-
-                    do {
-                        _ = try await recordingController.startRecording(displayID: displayID)
-                        // Only transition to recording after successful setup
-                        self.transition(to: .recording)
-                    } catch {
-                        // Rollback to idle state on recording failure
-                        self.transition(to: .idle)
-                        self.errorPresenter.presentCritical(error, from: window)
-                    }
-                }
-
-            case .webcam(let cameras, let settings):
-                print("✅ Selected \(cameras.count) camera(s)")
-
-                Task { @MainActor in
-                    let config = WebcamRecorder.WebcamRecordingConfig(
-                        cameras: cameras,
-                        compositingMode: settings.compositingMode,
-                        videoSettings: .init(
-                            resolution: settings.qualityPreset.resolution,
-                            frameRate: settings.qualityPreset.framerate,
-                            bitrate: settings.qualityPreset.bitrate
-                        ),
-                        audioSettings: settings.audioSettings,
-                        codec: settings.codec
-                    )
-
-                    let recorder = WebcamRecorder()
-                    do {
-                        self.showHUD()
-
-                        guard let recordingController = self.getRecordingController() else {
-                            print("⚠️ RecordingController not available")
-                            self.transition(to: .idle)
-                            return
-                        }
-
-                        let url = try await recordingController.startRecording(with: recorder, config: config)
-                        await self.handleRecordingStarted(url)
-                    } catch {
-                        await self.handleRecordingError(error)
-                        self.errorPresenter.presentCritical(error, from: window)
-                    }
-                }
-
-            case .window(let windows, let settings):
-                print("✅ Selected \(windows.count) window(s)")
-
-                Task { @MainActor in
-                    let config = WindowRecorder.Config(
-                        windowIDs: windows.map(\.id),
-                        settings: settings
-                    )
-
-                    let recorder = WindowRecorder()
-                    do {
-                        self.showHUD()
-
-                        guard let recordingController = self.getRecordingController() else {
-                            print("⚠️ RecordingController not available")
-                            self.transition(to: .idle)
-                            return
-                        }
-
-                        let url = try await recordingController.startRecording(with: recorder, config: config)
-                        await self.handleRecordingStarted(url)
-                    } catch {
-                        await self.handleRecordingError(error)
-                        self.errorPresenter.presentCritical(error, from: window)
-                    }
-                }
-
-            case .videoFile(let url):
-                print("✅ Selected video file: \(url.lastPathComponent)")
-
-                // Validate and load video
-                Task { @MainActor in
-                    await self.importVideo(from: url)
-                }
-            }
-        } onCancelled: { [weak self] in
-            print("ℹ️ Source selector cancelled")
-            Task { @MainActor in
-                self?.transition(to: .idle)
-            }
-        }
+        // Show as a regular window
+        sourceSelectorWindowController?.showWindow(nil)
+        window.makeKeyAndOrderFront(nil)
+        print("✅ Source selector window shown")
     }
 
     /// Shows the HUD window
